@@ -6,7 +6,7 @@ layout: home
 ---
 
 
-<img src="/assets/img/david.jpg" width="200" align="right" style="padding-left: 20px; padding-bottom: 20px;">
+<img src="/assets/images/david.jpg" width="200" align="right" style="padding-left: 20px; padding-bottom: 20px;">
 
 Hi I'm David. 
 I'm a PhD student in Computer Science at the University of Illinois at Urbana-Champaign.
