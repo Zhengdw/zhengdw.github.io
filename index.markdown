@@ -14,7 +14,7 @@ layout: home
 }
 </style>
 <p>
-<img src="/assets/img/david.jpg" width="200" align="right">
+<img src="/assets/img/david.jpg" width="200" align="right" style="padding-left: 20px; padding-bottom: 20px;">
 </p>
 
 Hi I'm David. 
