@@ -1,7 +1,5 @@
 ---
-layout: post
 title: "[corCTF 2021] smogofwar"
-author: zhed
 ---
 
 # [corCTF 2021] smogofwar
@@ -13,7 +11,8 @@ Beat a chess bot in "Smog of War" a variant of chess (almost?) identical to the
 
 ## Description
 
-misc/smogofwar; strellic ; 7 solves / 497 points
+misc/smogofwar; 7 solves , 497 points
+Challenge author: `strellic`
 
 Hey, I made a chess website to play my favorite variant, smog of war!
 Why don't you check it out and play against my AI. He has some nasty surprises,
