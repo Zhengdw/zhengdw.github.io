@@ -8,10 +8,10 @@ usemathjax: true
 
 ## tl;dr
 
-The flag is encrypted with a password of $a^d \pmod N$.
-Decrypt by solving the discrete logarithm problem to compute $d$ from $g^d\pmod N$ 
-and an oracle that given a number $g^x \pmod n$ will return the 883rd bit of $x$. 
-Do the discrete log problem by factorizing $N$ with the oracle by getting 
+The flag is encrypted with a password of $$a^d \pmod N$$.
+Decrypt by solving the discrete logarithm problem to compute $$d$$ from $$g^d\pmod N$$ 
+and an oracle that given a number $$g^x \pmod n$$ will return the 883rd bit of $$x$$. 
+Do the discrete log problem by factorizing $$N$$ with the oracle by getting 
 the top bits with a binary search, the lower bits by interactively querying the oracle
 and doing some number theory to factorize and compute the discrete log.
 
@@ -81,7 +81,7 @@ So it looks like `FLAG` is encrypted with `alice.pow_mod(d, N)`, and we are give
 so it is enough to figure out what `d` is.
 We are given `publ = G.pow_mod(d, N)` and `G = 2`, so we need to solve the discrete log problem
 to recover `d`. 
-Normally this is very difficult without knowing the factorization of $N$, but we also have access
+Normally this is very difficult without knowing the factorization of $$N$$, but we also have access
 to an oracle.
 
 ```rust
@@ -99,20 +99,20 @@ to an oracle.
     }
 ```
 Checking `nbits=1006` we have that `nbits-123 = 883`.
-So we have access to an oracle which given an integer $m$, computes the discrete log base $G$, 
-the value $x$ which solves $G^x \equiv m\pmod{N}$,
-then returns the 883rd bit of $x$.
+So we have access to an oracle which given an integer $$m$$, computes the discrete log base $$G$$, 
+the value $$x$$ which solves $$G^x \equiv m\pmod{N}$$,
+then returns the 883rd bit of $$x$$.
 
-So if we send to the oracle $2^y\pmod N$, the oracle will spit out the 883rd bit of
-$y\pmod{\texttt{ORDER}}$ where `ORDER` is the order of $2$ in $P$. 
-If $y< \texttt{ORDER}$ this just gives us the 883rd bit, but if we query larger numbers,
-we get the 883rd bit of $y-k\cdot \texttt{ORDER}$ for some $k$. 
-Let's denote $m_k = k\cdot \texttt{ORDER}$.
+So if we send to the oracle $$2^y\pmod N$$, the oracle will spit out the 883rd bit of
+$$y\pmod{\texttt{ORDER}}$$ where `ORDER` is the order of $$2$$ in $$P$$. 
+If $$y< \texttt{ORDER}$$ this just gives us the 883rd bit, but if we query larger numbers,
+we get the 883rd bit of $$y-k\cdot \texttt{ORDER}$$ for some $$k$$. 
+Let's denote $$m_k = k\cdot \texttt{ORDER}$$.
 
-Playing around with this, if the 883rd bit of $m_k$ of $1$,
-but that bit is $0$ for $m_i$ with $0\le i < k$,
+Playing around with this, if the 883rd bit of $$m_k$$ of $$1$$,
+but that bit is $$0$$ for $$m_i$$ with $$0\le i < k$$,
 than we can actually find the exact value of the leading bits if 
-we send queries with $y$ having the last 883 bit be all $1$s.
+we send queries with $$y$$ having the last 883 bit be all $$1$$s.
 
 ```python
 # pad the last b bits with 1s
@@ -137,11 +137,11 @@ assert(query(pad(lo))!=query(pad(hi)))
 ```
 
 At this point we have the highest bits, we want to recover the lower bits
-Since now we have have a good estimate of $m_k$ (call that $y$), 
-we can get the next bit by querying for $2y$,
-which we'll get a response of the 883rd bit of $2y-2m_k$,
-or equivalently the 882nd bit of $m_k$. This way we can recover the lower bits
-of $m_k$.
+Since now we have have a good estimate of $$m_k$$ (call that $$y$$), 
+we can get the next bit by querying for $$2y$$,
+which we'll get a response of the 883rd bit of $$2y-2m_k$$,
+or equivalently the 882nd bit of $$m_k$$. This way we can recover the lower bits
+of $$m_k$$.
 ```python
 # At this point, leading bits is hi, we should search for next bits 
 hi = 2*hi+1
@@ -152,8 +152,8 @@ for i in range(b+1):
         hi = 2*hi
 ```
 
-From here, we can guess that $m_1 = \texttt{ORDER}$ is $\phi(N)/2$,
-and use that to compute the factorization of $N$ into $p$ and $q$.
+From here, we can guess that $$m_1 = \texttt{ORDER}$$ is $$\phi(N)/2$$,
+and use that to compute the factorization of $$N$$ into $$p$$ and $$q$$.
 ```python
 # ok at this point, hi is k*phi/? where ? is 2 or 3, guess ? = 2
 qs = 2
