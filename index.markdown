@@ -5,7 +5,17 @@
 layout: home
 ---
 
+<style type="text/css">
+.image-left {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  float: right;
+}
+</style>
+<p>
 <img src="/assets/img/david.jpg" width="200" align="right">
+</p>
 
 Hi I'm David. 
 I'm a PhD student in Computer Science at the University of Illinois at Urbana-Champaign.
