@@ -7,6 +7,7 @@ title: Blog
 I started playing in some CTFs for fun with [Maple Bacon](https://ubcctf.github.io/) (UBC CTF) team Jul. 2021, 
 and with [SIGPwny](://sigpwny.com/) (UIUC) Sep. 2021.
 
+<p>
 {%- if site.posts.size > 0 -%}
 <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
 <ul class="post-list">
@@ -25,6 +26,7 @@ and with [SIGPwny](://sigpwny.com/) (UIUC) Sep. 2021.
   </li>
   {%- endfor -%}
 </ul>
+<p>
 
 <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
 {%- endif -%}
