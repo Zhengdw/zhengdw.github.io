@@ -21,9 +21,9 @@
 title: Da Wei (David) Zheng
 email: dwzheng2 atsymbl illinois doot edu
 description: >- # this means to ignore newlines until "baseurl:"
-    "I'm a PhD student studying theoretical computer science 
+    PhD student studying theoretical computer science 
     at the University of Illinois at Urbana-Champaign (UIUC).
-    I enjoy solving problems for fun."
+    I enjoy solving problems for fun.
 baseurl: "/about" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
