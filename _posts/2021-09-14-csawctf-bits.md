@@ -1,6 +1,7 @@
 ---
 title: "[CSAW CTF 2021] bits"
 keywords: ctf, cryptography, crypto, binary search, number theory
+usemathjax: true
 ---
 
 # [CSAW CTF 2021] Bits 
