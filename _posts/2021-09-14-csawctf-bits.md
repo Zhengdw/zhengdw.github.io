@@ -17,7 +17,7 @@ and doing some number theory to factorize and compute the discrete log.
 ## Description 
 
 crypto/bits; 24 solves, 497 points
-Challenge authors: `Robin_Jadoul` and `Jack`
+Challenge authors: `Robin_Jadoul` and `jack`
 
 I wrote this oracle in rust so that it can't sue companies over java stuff.
 
