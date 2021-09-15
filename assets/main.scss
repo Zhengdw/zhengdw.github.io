@@ -4,7 +4,11 @@
 
 @import "minima";
 
-.pubitem {
+* {
+    font-family: "PT Serif", serif !important;
+}
+
+pubitem {
   margin: 2em 0;
   line-height: 1em;
 }
