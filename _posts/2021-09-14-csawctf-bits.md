@@ -114,6 +114,7 @@ than we can actually find the exact value of the leading bits if
 we send queries with $$y$$ having the last 883 bit be all $$1$$s.
 
 ```python
+b = 883
 # pad the last b bits with 1s
 def pad(k):
     return k*2**(b+1) | (2**(b+1)-1)
