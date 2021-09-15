@@ -27,7 +27,7 @@ nc crypto.chal.csaw.io 5006
 
 ## Solving the challenge
 
-We first notice that the code verifies our triple (answer, \(r\), \(s\)), before
+We first notice that the code verifies our triple (answer, $$r$$, $$s$$), before
 checking if certain strings appear as a substring as our answer.
 ```python
     elif verify(answer, r, s, y):
@@ -39,7 +39,7 @@ checking if certain strings appear as a substring as our answer.
             print("Brown noser!")
         print(flag)
 ``` 
-Furthermore a mask of the lower 1024 bits is defined and only that is verified against \(r\) and \(s\).
+Furthermore a mask of the lower 1024 bits is defined and only that is verified against $$r$$ and $$s$$.
 ```python3
 MASK = 2**1024 - 1
 
@@ -52,19 +52,19 @@ def verify(answer: str, r: int, s: int, y: int):
     return pow(g, m, p) == (pow(y, r, p) * pow(r, s, p)) % p
 ```
 
-So we can choose any message \(m\) of up 1024 bits, hide our substring in the upper bits, and come up with an \(r\) and \(s\) that satisfies:
+So we can choose any message $$m$$ of up 1024 bits, hide our substring in the upper bits, and come up with an $$r$$ and $$s$$ that satisfies:
 
-\[
+$$
 g^m \equiv y^r r^s \pmod p
-\]
+$$
 
-Furthermore, none of our choices of \(m, r, s\) can be equal to 0 or \(p-1\), which would easily and trivially satisfy the equation.
-However we can choose the next best thing, \( m = r = s = \frac{p-1}{2}\). 
-By basic number theory, any number to the power of \(\frac{p-1}{2}\) is either \(1\) or \(-1\)
-mod \(p\), and these numbers are distributed essentially randomly (not really but for our purposes
+Furthermore, none of our choices of $$m, r, s$$ can be equal to 0 or $$p-1$$, which would easily and trivially satisfy the equation.
+However we can choose the next best thing, $$ m = r = s = \frac{p-1}{2}$$. 
+By basic number theory, any number to the power of $$\frac{p-1}{2}$$ is either $$1$$ or $$-1$$
+mod $$p$$, and these numbers are distributed essentially randomly (not really but for our purposes
 they are).
 
-So with a \(50\%\) chance this choice will work!
+So with a $$50\%$$ chance this choice will work!
 
 Solve script:
 
