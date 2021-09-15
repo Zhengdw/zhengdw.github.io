@@ -1,6 +1,5 @@
 ---
 layout: home
-title: David Zheng's website
 ---
 
 
