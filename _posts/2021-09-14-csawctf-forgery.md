@@ -14,8 +14,7 @@ Only the lower 1024 bits of input matter so we can fake a message by using numbe
 
 ## Description 
 
-crypto/bits; 24 solves, 497 points
-Challenge authors: `Robin_Jadoul` and `jack`
+crypto/bits; 127 solves, 405 points
 
 Felicity and Cisco would like to hire you as an intern for a new security company that they are forming. They have given you a black box signature verification system to test out and see if you can forge a signature. Forge it and you will get a passphrase to be hired! 
 
