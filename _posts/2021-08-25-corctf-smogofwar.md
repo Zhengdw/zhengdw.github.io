@@ -1,5 +1,6 @@
 ---
 title: "[corCTF 2021] smogofwar"
+layout: post
 ---
 
 # [corCTF 2021] smogofwar

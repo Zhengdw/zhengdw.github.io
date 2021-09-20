@@ -1,5 +1,6 @@
 ---
 title: "[CSAW CTF 2021] forgery"
+layout: post
 keywords: ctf, cryptography, crypto, number theory
 ---
 
@@ -39,7 +40,7 @@ checking if certain strings appear as a substring as our answer.
         print(flag)
 ``` 
 Furthermore a mask of the lower 1024 bits is defined and only that is verified against $$r$$ and $$s$$.
-```python3
+```python
 MASK = 2**1024 - 1
 
 ...
@@ -57,7 +58,7 @@ $$
 g^m \equiv y^r r^s \pmod p
 $$
 
-Furthermore, none of our choices of $$m, r, s$$ can be equal to 0 or $$p-1$$, which would easily and trivially satisfy the equation.
+Furthermore, none of our choices of $$m, r, s$$ can be equal to $$0$$ or $$p-1$$, which would easily and trivially satisfy the equation.
 However we can choose the next best thing, $$ m = r = s = \frac{p-1}{2}$$. 
 By basic number theory, any number to the power of $$\frac{p-1}{2}$$ is either $$1$$ or $$-1$$
 mod $$p$$, and these numbers are distributed essentially randomly (not really but for our purposes
