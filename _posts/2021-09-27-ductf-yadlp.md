@@ -22,7 +22,7 @@ Yet another discrete logarithm problem challenge...
 [yadlp.sage](https://play.duc.tf/files/85c7911a3127752c188b8839b7edaeeb/yadlp.sage)
 [output.txt](https://play.duc.tf/files/bdfdc35ee7c0ada2987a3a40b53d897a/output.txt)
 
-## Solving the discrete log problem
+## Solving the problem 
 
 I started by looking at the files, and saw some familiar looking group operations
 that looked like elliptic-curve cryptography (ECC).
@@ -52,7 +52,27 @@ def get_elem(x):
         return -1
 ```
 
-However, on closer inspection, the `get_element` function looks a little funny.
+The flag was encoded by splitting the 48 byte input into 6 segments of 8 bytes long, and
+summed them together with the group operation. 
+We need to first solve the discrete log problem to recover the coefficients of the summands,
+then somehow recover the summands.
+
+```python
+FLAG = open('flag.txt', 'rb').read().strip()
+assert len(FLAG) % 8 == 0
+M = [int.from_bytes(FLAG[i:i+8], 'big') for i in range(0, len(FLAG), 8)]
+print(f'{FLAG = }')
+print(f'{M = }')
+
+G = [rand_element() for _ in M]
+c = (1, 0)
+for m, gi in zip(M, G):
+    c = G_add(c, G_mul(gi, m))
+```
+
+### Solving the discrete log problem
+
+I thought it was ECC but on closer inspection, the `get_element` function looks a little funny.
 The equation suggests that we're working with some curve where $$y$$ satisfies
 the equation (over $$\mathbb{Z}_p$$):
 
@@ -70,18 +90,6 @@ wrote a short function to check that all operations done in the encoding were on
 def on_curve(A):
     x, y = A
     return (y*y*D -x*x - 2*x*y + 1)%p ==0
-
-FLAG = b'DUCTF{hislaifasdilfkjaskdlffdk_3891259s}' # test flag
-assert len(FLAG) % 8 == 0
-M = [int.from_bytes(FLAG[i:i+8], 'big') for i in range(0, len(FLAG), 8)]
-print(f'{FLAG = }')
-print(f'{M = }')
-
-G = [rand_element() for _ in M]
-c = (1, 0)
-for m, gi in zip(M, G):
-    c = G_add(c, G_mul(gi, m))
-    assert(on_curve(c))
 ```
 
 Furthermore, $$(1, 0)$$ seemed to be the identity element.
@@ -128,7 +136,7 @@ Instead I searched elsewhere for a discrete_log method.
 I went and modified the commented out `old_discrete_log` method I found in [a super outdated version of the sage library](https://github.com/sagemath/sagelib/blob/master/sage/groups/generic.py) that
 I stumbled across on Google. It worked!
 
-## Solving the Modular Knapsack Problem
+### Solving the Modular Knapsack Problem
 Now we're still not done yet, we had to solve the following problem (which I learned afterwards was called the Modular Knapsack Problem) where $$a, b, ..., e$$ were known, and $$x_0, ... x_5$$ were
 numbers that were at most $$2^{64}$$ (pretty small compared to $$p$$).
 
