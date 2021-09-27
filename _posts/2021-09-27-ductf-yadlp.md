@@ -131,7 +131,7 @@ was to pass in:
 Unfortunately, somebody changed the sage library function at some point and made it not so 
 generic. Took me a while to figure out why I kept getting python errors until I looked at
 the source code and realized it didn't even try to use the operations I passed in and instead
-tried to use the `**` operation (I probably should submit an issue or bug fix at some point). 
+tried to use the `**` operation (apparently this is a [known issue](https://trac.sagemath.org/ticket/32334)). 
 Instead I searched elsewhere for a discrete_log method.
 I went and modified the commented out `old_discrete_log` method I found in [a super outdated version of the sage library](https://github.com/sagemath/sagelib/blob/master/sage/groups/generic.py) that
 I stumbled across on Google. It worked!
