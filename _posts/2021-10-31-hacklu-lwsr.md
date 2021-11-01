@@ -50,7 +50,7 @@ pk  = [list(lwe()) for _ in range(m)]
 sk  = lwe._LWE__s 
 ```
 
-This generates a secret vector $$s$$, and a list of `m` public key values consisting of a $$n$$ dimensional vector $$v_i$$ and a value $$c_i$$ where $$s \dot v_i \approx c_i$$. For these sage commands, we are working in $$\mathbb{F}_q$$ for $$q = 16411$$, and approximately equal means some small error according to a discrete gaussian distribution.
+This generates a secret vector $$s$$, and a list of `m` public key values consisting of a $$n$$ dimensional vector $$v_i$$ and a value $$c_i$$ where the dot product $$s \cdot v_i \approx c_i$$. For these sage commands, we are working in $$\mathbb{F}_q$$ for $$q = 16411$$, and approximately equal means some small error according to a discrete gaussian distribution.
 
 Both LWE and LFSR have uses in cryptography.
 LFSRs are not a very cryptographically secure as a random bit generator, though it has the right distribution of bits in the output, and can have very long cycles. 
@@ -81,7 +81,7 @@ for byte in flag:
         state = lfsr(state)
 ```
 
-this code encrypts each bit of the string by computing $$v = \sum_{i\in L} v_i$$ where $$L$$ are the on bits in the LFSR and computing the corresponding approximate $$c = \sum_{c_i\in L} c_i$$, and adding $$q/2$$ in $$F_q$$ if the bit is on. 
+The code encrypts each bit of the string by computing $$v = \sum_{i\in L} v_i$$ where $$L$$ are the on bits in the LFSR and computing the corresponding approximate $$c = \sum_{c_i\in L} c_i$$, and adding $$q/2$$ in $$F_q$$ if the bit is on. 
 Note that $$c$$ is approximate, but the sum of a gaussian distribution is still a gaussian distribution with a wider distribution, so it is still approximately correct.
 
 Afterwards, the server let's us encode our own messages bit by bit, and checks if it is correct.
@@ -137,7 +137,7 @@ def revlfsr(state):
     return ((state << 1) | (newbit)) & ((1<<384) -1)
 ```
 
-And now we're done! We know the full state of the LFSR, so if we try encrypting using the same scheme, if the value we compute by summing the corresponding values $$c_i$$ in the public key is exactly equal, than we know that bit is 0, otherwise, we should be off by exactly `q >> 1` or $$8205$$, so we are done without having to deal with any vector operations at all!
+And now we're done! We know the full state of the LFSR, so if we try encrypting using the same scheme, if the value we compute by summing the corresponding values $$c_i$$ in the public key is exactly equal, than we know that bit is 0, otherwise, we should be off by exactly `q >> 1`($$8205$$), so we are done without having to deal with any vector operations at all!
 
 Doing this gives us the flag!
 ```
@@ -145,7 +145,7 @@ flag{your_fluxmarket_stock_may_shift_up_now}
 ```
 
 Note that there were other linear algebra solutions based on the structure of the LFSR, including those that didn't need to send ANY queries to the server. This is because we have an exact sum of vectors, so we can solve directly for the internal state of the LFSR.
-On the other hand my solution didn't even look at a vector at all, and didn't even need to compute the secret vector.
+On the other hand my solution didn't even look at a single vector!
 
 Full solve script:
 ```python
@@ -224,5 +224,4 @@ for v, x in c:
 
 print(ans)
 ```
-
 
