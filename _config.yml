@@ -40,10 +40,40 @@ markdown: kramdown
 sass:
   sass_dir: css
   style:    compressed
-collections:
-  publications:
-    output: true
-    permalink: /:collection/:name
+
+#collections:
+#  publications:
+#    output: true
+#    permalink: /:collection/:name
+
+
+
+# jekyll scholar settings
+scholar:
+  #style: assets/bibliography/ieee-with-url.csl
+  style: assets/bibliography/ieee.csl
+  #style: apa
+  locale: en
+
+  sort_by: year
+  order: descending
+
+  source: _bibliography
+
+  repository: pdf
+
+  bibliography: references.bib
+  bibliography_template: bibtemplate
+  bibliography_list_tag: u1
+
+  replace_strings:  true
+  join_strings:     true
+
+  #details_dir:    bibliography
+  #details_layout: bibtex.html
+  #details_link:   Details
+
+  query: "@*"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -53,14 +83,16 @@ collections:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+include:
+  - _pages
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
