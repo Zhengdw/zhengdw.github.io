@@ -50,7 +50,7 @@ pk  = [list(lwe()) for _ in range(m)]
 sk  = lwe._LWE__s 
 ```
 
-This generates a secret vector $$s$$, and a list of `m` public key values consisting of a $$n$$ dimensional vector $$v_i$$ and a value $$c_i$$ where the dot product $$s \cdot v_i \approx c_i$$. For these sage commands, we are working in $$\mathbb{F}_q$$ for $$q = 16411$$, and approximately equal means some small error according to a discrete gaussian distribution.
+This generates a secret vector $$s$$, and a list of $$m$$ public key values consisting of a $$n$$ dimensional vector $$v_i$$ and a value $$c_i$$ where the dot product $$s \cdot v_i \approx c_i$$. For these sage commands, we are working in $$\mathbb{F}^n_q$$ for $$q = 16411$$, and approximately equal means some small error according to a discrete gaussian distribution.
 
 Both LWE and LFSR have uses in cryptography.
 LFSRs are generate a stream cipher with the right distribution of bits in the output, and can have very long cycles, and is simple to implement (even in hardware) however there are serious flaws with its security.
