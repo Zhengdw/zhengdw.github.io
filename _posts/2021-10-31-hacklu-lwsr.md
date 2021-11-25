@@ -81,7 +81,7 @@ for byte in flag:
         state = lfsr(state)
 ```
 
-The code encrypts each bit of the string by computing $$v = \sum_{i\in L} v_i$$ where $$L$$ are the on bits in the LFSR and computing the corresponding approximate $$c = \sum_{c_i\in L} c_i$$, and adding $$q/2$$ in $$F_q$$ if the bit is on. 
+The code encrypts each bit of the string by computing $$v = \sum_{i\in L} v_i$$ where $$L$$ are the on bits in the LFSR and computing the corresponding approximate $$c = \sum_{c_i\in L} c_i$$, and adding `q >> 1` in $$\mathbb{F}_q$$ if the bit is on. 
 Note that $$c$$ is approximate, but the sum of a gaussian distribution is still a gaussian distribution with a wider distribution, so it is still approximately correct.
 
 Afterwards, the server let's us encode our own messages bit by bit, and checks if it is correct.

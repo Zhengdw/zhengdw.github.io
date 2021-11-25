@@ -5,6 +5,8 @@ layout: post
 
 # [corCTF 2021] smogofwar
 
+Original writeup at [https://ubcctf.github.io/2021/08/corctf-smogofwar/](https://ubcctf.github.io/2021/08/corctf-smogofwar/).
+
 ## tl;dr
 
 Beat a chess bot in "Smog of War" a variant of chess (almost?) identical to the

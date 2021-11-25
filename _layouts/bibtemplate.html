@@ -7,8 +7,8 @@
     <a href="{{ entry.doi | prepend: 'http://doi.org/' }}"><input class="button1" type="button" value="doi" /></a>
 {% endif %}
  
-{% if entry.preprint %}
-    <a href="{{ entry.preprint }}"><input class="button2" type="button" value="preprint" /></a>
+{% if entry.arxiv %}
+    <a href="{{ entry.arxiv }}"><input class="button2" type="button" value="arXiv" /></a>
 {% endif %}
  
 {% if entry.link %}
