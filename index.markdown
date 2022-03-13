@@ -3,7 +3,7 @@ layout: home
 ---
 
 
-<img src="/assets/images/david.jpg" width="200" align="right" style="padding-left: 20px; padding-bottom: 20px;">
+<img src="/assets/images/david/david1.jpg" width="200" align="right" style="padding-top: 50px; padding-left: 20px; padding-bottom: 20px;">
 
 # About 
 

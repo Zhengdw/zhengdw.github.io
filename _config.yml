@@ -64,7 +64,7 @@ scholar:
 
   bibliography: references.bib
   bibliography_template: bibtemplate
-  bibliography_list_tag: u1
+  bibliography_list_tag: ul
 
   replace_strings:  true
   join_strings:     true
