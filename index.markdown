@@ -14,7 +14,7 @@ MSc in Computer Science at the University of British Columbia.
 
 My broad interests lie in theoretical computer science, predominantly in algorithms and data structures. I enjoy thinking about problems involving graphs and geometry.  
 
-You can see a list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
+You can see a list of my papers [here](/publications.html). Here is my [CV](/assets/DaWei_Zheng_cv.pdf).
 
 ### Other Activities
 I was involved in competitive programming at UBC. I went to ICPC world finals 2018 and 2019, and was the coach of the 2020 and 2021 UBC team (both of which qualified for world finals).
