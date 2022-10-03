@@ -9,7 +9,7 @@ keywords: ctf, cryptography, mmh3, hash collision
 ## tl;dr
 
 Find a hash collision for a bloom filter using [MurmurHash3](https://en.wikipedia.org/wiki/MurmurHash) aka mmh3.
-I got first blood on the challenge by being too lazy to do cryptanalysis and instead using the powers of OSINT and finding existing solutions online.
+I got first blood on the challenge by being too lazy to do cryptanalysis and instead using the powers of OSINT to find an existing solutions coded by real cryptographers.
 
 ## Description
 
@@ -262,10 +262,10 @@ The blog said similar techniques are possible, but I don't feel like (or really 
 We're not completely out of luck as the blog mentions results Aumasson and Bernstein "completely breaking" MurmurHash3 by finding multicollision hashes and providing implementations of it at the following URL: [https://131002.net/siphash/#at](https://131002.net/siphash/#at). Following the URL unfortuantely redirects to the [homepage of JP Aumasson](https://www.aumasson.jp/#at), and clicking the SipHash link on his homepage just goes to the Wikipedia page for SipHash. 
 It seemed like Aumasson must have reorganized his web pages, so we're out of luck here.
 
-Or are we? Good thing the [Internet Archive](https://archive.org/web/) exists, we'll just use the Wayback Machine to travel back in time before he reorganized his web page (assuming the page at some point got a lot of traffic.
-Fortunately for us it got [lots of traffix in 2018](https://web.archive.org/web/20180401000000*/131002.net/siphash) and sporadically in other years. On the website he provides some [C++ code to find universal (key-independent) hash collisions](https://web.archive.org/web/20180901061338/https://131002.net/siphash/murmur3collisions-20120827.tar.gz), which is exactly what I want.
+Or are we? Good thing the [Internet Archive](https://archive.org/web/) exists, we'll just use the Wayback Machine to travel back in time before he reorganized his web page (assuming the page at some point got a lot of traffic).
+Fortunately for us it got [lots of traffic in 2018](https://web.archive.org/web/20180401000000*/131002.net/siphash) and sporadically in other years. On the website he provides some [C++ code to find universal (key-independent) hash collisions](https://web.archive.org/web/20180901061338/https://131002.net/siphash/murmur3collisions-20120827.tar.gz), which is exactly what I want.
 
-Downloading, and untarring I inspected the source code and found the following comment:
+After downloading and untarring, I inspected the source code and am greeted with the following comment:
 ```c++
 /*
  * multicollisions for MurmurHash3
@@ -292,9 +292,8 @@ Downloading, and untarring I inspected the source code and found the following c
  */
 ```
 
-Huh, so they provide some 16-byte input that cause hash collisions. However we need 32-byte collisions.
-My first idea was to look through the code to try to see if I can easily change some parameter in their code to change it to 32-byte collisions. 
-It didn't look like there was (looked like there were attacks on 32bit and 64bit versions of MurmurHash3, but I didn't look very hard).
+Huh, so they provide some example 16-byte input that cause hash collisions. However we need 32-byte collisions.
+The natural next step was to look through the code to try to see if I can easily change some parameter in their code to change it to 32-byte collisions (it looks like it would be trivial to, but I never even bothered running their code). 
 Instead I figure I'd try to see if the 16-byte collisions they found extended to 32-byte ones, by just doubling them (adding a copy of themselves to the end).
 This might be a strange thing to try, but these sorts of hashes that shift bits around are usually very amenable to
 length extension type attacks, so it seemed to be a reasonable thing to try.
@@ -357,5 +356,5 @@ Enter key in hex
 b'SEKAI{56f066a1b13fd350ac4a4889efe22cb1825651843e9d0ccae0f87844d1d65190}'
 ```
 
-Neato, I solved (and in fact got first blood) on a cryptography challenge without writing any real code, or doing any of my own cryptanalysis.
+Neato, I solved (and in fact got first blood) on a cryptography challenge without doing any of my own cryptanalysis, writing any real code, or even running any real code.
 
