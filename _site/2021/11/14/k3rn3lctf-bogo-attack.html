@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>[K3RN3L CTF 2021] BogoAttack | Da Wei (David) Zheng</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="[K3RN3L CTF 2021] BogoAttack" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="[K3RN3L CTF 2021] BogoAttack" />
+<meta property="og:description" content="[K3RN3L CTF 2021] BogoAttack" />
+<link rel="canonical" href="/2021/11/14/k3rn3lctf-bogo-attack.html" />
+<meta property="og:url" content="/2021/11/14/k3rn3lctf-bogo-attack.html" />
+<meta property="og:site_name" content="Da Wei (David) Zheng" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-11-14T00:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[K3RN3L CTF 2021] BogoAttack" />
+<script type="application/ld+json">
+{"headline":"[K3RN3L CTF 2021] BogoAttack","dateModified":"2021-11-14T00:00:00-06:00","datePublished":"2021-11-14T00:00:00-06:00","url":"/2021/11/14/k3rn3lctf-bogo-attack.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/11/14/k3rn3lctf-bogo-attack.html"},"@type":"BlogPosting","description":"[K3RN3L CTF 2021] BogoAttack","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Da Wei (David) Zheng" /><script type="text/javascript" async
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Da Wei (David) Zheng</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog.html">Blog</a><a class="page-link" href="/publications.html">Publications</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">[K3RN3L CTF 2021] BogoAttack</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-11-14T00:00:00-06:00" itemprop="datePublished">Nov 14, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="k3rn3l-ctf-2021-bogoattack">[K3RN3L CTF 2021] BogoAttack</h1>
+
+<h2 id="tldr">tl;dr</h2>
+
+<p>Find the order of a permutation of size \(10^4\) stored in an array
+with an oracle that is able to get the contents
+of a subset of indices of the array but randomly shuffles the contents before returning.
+There is a limit of \(15\) queries.
+Solve by a divide and conquer/parallel binary search algorithm.</p>
+
+<h2 id="description">Description</h2>
+
+<p>misc/BogoAttack; 26 solves, 446 points</p>
+
+<p>Challenge author: <code class="language-plaintext highlighter-rouge">DrDoctor</code></p>
+
+<p>Someone attacced by Bogo! I must seek revenge. Now is the time to attacc back!</p>
+
+<p><a href="https://flu.xxx/static/chall/lwsr_0c872acfc0b66f185a4968ac3198e067.zi://ctf.k3rn3l4rmy.com/kernelctf-distribution-challs/bogo-attack/main.py">main.py</a></p>
+
+<h2 id="first-impressions-of-the-problem">First impressions of the problem</h2>
+
+<p>This problem was actually first given as <code class="language-plaintext highlighter-rouge">Bogo Solve</code> where the query limit was
+accidentally not enforced. 
+I didn’t notice and solved this problem (and later only modified the port
+of the server in my solve script). 
+I’ll walk through my first thoughts on the problem assuming the limit was
+actually enforced.</p>
+
+<p>We’re given the following python script that’s running on the server:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">NUMS</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">NUMS</span><span class="p">)</span>
+<span class="n">tries</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'Enter (1) to steal and (2) to guess: '</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tries</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">'You ran out of tries. Bye!'</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">(</span><span class="s">'Enter numbers to steal: '</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">))</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="mi">0</span><span class="o">&lt;=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">NUMS</span><span class="p">)</span>
+                <span class="n">output</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">NUMS</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'Stolen:'</span><span class="p">,</span><span class="n">output</span><span class="p">)</span>
+            <span class="n">tries</span><span class="o">-=</span><span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="nb">input</span><span class="p">(</span><span class="s">'What is the list: '</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="n">NUMS</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'flag.txt'</span><span class="p">,</span><span class="s">'r'</span><span class="p">).</span><span class="n">read</span><span class="p">())</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">'NOPE'</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'Not a choice.'</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Error. Nice Try...'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I got pretty excited when I saw the question, as a former competitive programmer (or maybe I still am one?) and a computer science theory student.
+(So excited that I probably spent ten times longer writing this writeup than 
+actually solving and coding a solution.)
+I immediately recognize this as an interactive competitive programming question. 
+(This might have seen this exact one on <a href="https://codeforces.com/">Codeforces</a> or
+<a href="https://atcoder.jp/">AtCoder</a> but interactive problems are pretty rare, and my memory is fuzzy)
+The question can be summarized as follows:</p>
+
+<blockquote>
+  <p>Given a permutation of size \(10^4\) in an array and access to the array
+via an oracle 
+that is able to get the contents of a subset of indices of the array 
+but randomly shuffles the contents before returning.
+Find the contents in at most \(15\) queries.</p>
+</blockquote>
+
+<p>First we note that \(15\) is more or less \(\log_2(10^4)\),
+ so we want to make logarithmically many queries. 
+This suggests some sort of divide and conquer solution.
+But what exactly are we dividing here?</p>
+
+<h2 id="a-divide-and-conquer-approach">A Divide and Conquer approach</h2>
+
+<p>Let’s think about what we can accomplish with one query.
+We can split the array down the middle and query all the indices
+in the first half as pictured below. What does this give us?</p>
+
+<p><img src="/assets/images/k3rn3lctf2021/bogoattack/DC1.png" alt="dc1" /></p>
+
+<p>The server would tell us which elements are in the first half,
+which (by simple deduction) would tell us the rest of the elements
+are in the second half.
+Now we can treat these two halves of the array as two seperate problems
+in and of themselves and do the same thing.</p>
+
+<p><img src="/assets/images/k3rn3lctf2021/bogoattack/DC2.png" alt="dc2" /></p>
+
+<p>For each of these subproblems we can repeat again, and 
+continue until we know exactly where every element is!</p>
+
+<p><img src="/assets/images/k3rn3lctf2021/bogoattack/DC3.png" alt="dc3" /></p>
+
+<p>However, naively this would give us a lot of queries,
+in particular, if we let \(Q(n)\) denote the number of queries
+needed to solve the problem on an array of size \(n\), 
+we essentially found the following recurrence:</p>
+
+\[Q(n) = 2 Q(n/2) + 1\]
+
+<p>Unfortuantely this solves to \(Q(n) = n\), which is no better than
+querying each position individually!
+We need one more idea to help us out.
+What if we send the queries for all our subproblems of the 
+same size simultaneously?</p>
+
+<p>Since the elements involved in each subproblem form a partition of our
+original elements, it doesn’t matter that we get the elements in a random order,
+we already <strong>know</strong> which elements are from each subproblem.
+This means we can solve the problem with the recurrence of:</p>
+
+\[Q(n) = Q(n/2) + 1  = \lfloor \log_2 n \rfloor\]
+
+<p>However, coding a solution like this seems complicated, how do we maintain
+all these subproblems?</p>
+
+<h2 id="another-way-of-looking-at-things">Another way of looking at things</h2>
+
+<p>Let’s take a step back and look at what we’re learning from each we make.
+For simplicity, let’s actually assume that we are working with a permutation
+of size \(2^{14}\) elements (\(16384\))
+instead of \(10^4\) elements. We’ll see why this makes things easier in a bit.</p>
+
+<p>Let’s look at the first query to a problem:</p>
+
+<p><img src="/assets/images/k3rn3lctf2021/bogoattack/DC1.png" alt="dc1" /></p>
+
+<p>Querying for which elements are in the first half of the array is 
+essentially looking at what elements have the index of the first bit
+be \(0\). The rest of the numbers have first bit \(1\).
+So a query can learn the most significant bit of the <strong>positions</strong> of all the numbers 
+in the list!</p>
+
+<p>In fact, there was nothing special about chooosing the first half,
+the positions with most siginficant bit \(0\).
+We could just as easily
+have chosen every position with a \(0\) in the \(k\)th bit for some \(1\le k \le 14\)
+and learn that bit for every element in the permutation!</p>
+
+<p>So this suggests another algorithm, for each bit, learn the \(k\)th bit of 
+every element for every \(k\).
+If you examine this new algorithm closely, this would make the same queries
+as the divide and conquer algorithm we had before!</p>
+
+<p>This is a fairly common phenomenon, when doing binary divide and conquer,
+we can instead view it in terms of the bits of the number and work with those for a
+much simpler to code algorithm 
+(this forms the basis of things like <a href="https://codeforces.com/blog/entry/18051">segment trees</a>).</p>
+
+<p>We can view this as a form of parallel binary search, for every element of
+the permutation, we are finding
+its position in the list via binary search.
+Cleverly, we’re able to do this for all 
+elements at once!</p>
+
+<p>This is what I ended up coding:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">read_until</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="sa">b</span><span class="s">'='</span><span class="p">):</span>
+    <span class="n">delim</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">delim</span><span class="p">,</span> <span class="s">"ascii"</span><span class="p">)</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="sa">b</span><span class="s">''</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">buf</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">delim</span><span class="p">):</span>
+        <span class="n">buf</span> <span class="o">+=</span> <span class="n">s</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"[+] READING: "</span><span class="p">,</span> <span class="n">buf</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">buf</span>
+
+<span class="n">sock</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s">"ctf.k3rn3l4rmy.com"</span><span class="p">,</span> <span class="mi">2247</span><span class="p">)</span>
+
+
+<span class="n">NUMS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">POS</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">14</span><span class="p">):</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">':'</span><span class="p">)</span>
+    <span class="n">sock</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s">'1'</span><span class="p">)</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">':'</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">&gt;&gt;</span><span class="n">i</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span>
+    <span class="n">sock</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">output</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">'['</span><span class="p">)</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">']'</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s">', '</span><span class="p">)</span>
+    <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="n">POS</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">i</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">NUMS</span><span class="p">[</span><span class="n">POS</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span> <span class="o">=</span> <span class="n">x</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">NUMS</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s">" "</span>
+<span class="n">sock</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'2'</span><span class="p">)</span>
+<span class="n">sock</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">output</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">sock</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div></div>
+
+
+  </div><a class="u-url" href="/2021/11/14/k3rn3lctf-bogo-attack.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Da Wei (David) Zheng</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Da Wei (David) Zheng</li><li><a class="u-email" href="mailto:dwzheng2 atsymbl illinois doot edu">dwzheng2 atsymbl illinois doot edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zhengdw"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zhengdw</span></a></li><li><a href="https://www.linkedin.com/in/zhengdw"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zhengdw</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>PhD student studying theoretical computer science  at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+  </body>
+
+</html>

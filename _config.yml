@@ -52,6 +52,7 @@ sass:
 scholar:
   #style: assets/bibliography/ieee-with-url.csl
   style: assets/bibliography/ieee.csl
+  #style: assets/bibliography/acm.csl
   #style: apa
   locale: en
 
@@ -65,6 +66,7 @@ scholar:
   bibliography: references.bib
   bibliography_template: bibtemplate
   bibliography_list_tag: ul
+  bibtex_skip_fileds: ["url", "doi"]
 
   replace_strings:  true
   join_strings:     true
@@ -74,6 +76,8 @@ scholar:
   #details_link:   Details
 
   query: "@*"
+
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.

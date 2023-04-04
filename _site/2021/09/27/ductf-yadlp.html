@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>[DUCTF 2021] yadlp | Da Wei (David) Zheng</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="[DUCTF 2021] yadlp" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="[DUCTF 2021] yadlp" />
+<meta property="og:description" content="[DUCTF 2021] yadlp" />
+<link rel="canonical" href="/2021/09/27/ductf-yadlp.html" />
+<meta property="og:url" content="/2021/09/27/ductf-yadlp.html" />
+<meta property="og:site_name" content="Da Wei (David) Zheng" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-27T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[DUCTF 2021] yadlp" />
+<script type="application/ld+json">
+{"headline":"[DUCTF 2021] yadlp","dateModified":"2021-09-27T00:00:00-05:00","datePublished":"2021-09-27T00:00:00-05:00","url":"/2021/09/27/ductf-yadlp.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/09/27/ductf-yadlp.html"},"@type":"BlogPosting","description":"[DUCTF 2021] yadlp","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Da Wei (David) Zheng" /><script type="text/javascript" async
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Da Wei (David) Zheng</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog.html">Blog</a><a class="page-link" href="/publications.html">Publications</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">[DUCTF 2021] yadlp</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-09-27T00:00:00-05:00" itemprop="datePublished">Sep 27, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="ductf-2021-yadlp">[DUCTF 2021] yadlp</h1>
+
+<h2 id="tldr">tl;dr</h2>
+
+<p>Solve the discrete log problem on a funny looking group described by points on a hyperbolic
+curve, then solve the modular knapsack problem for the flag.</p>
+
+<h2 id="description">Description</h2>
+
+<p>crypto/yadlp; 14 solves, 494 points</p>
+
+<p>Challenge author: <code class="language-plaintext highlighter-rouge">joseph#8210</code></p>
+
+<p>Yet another discrete logarithm problem challenge…</p>
+
+<p><a href="https://play.duc.tf/files/85c7911a3127752c188b8839b7edaeeb/yadlp.sage">yadlp.sage</a>
+<a href="https://play.duc.tf/files/bdfdc35ee7c0ada2987a3a40b53d897a/output.txt">output.txt</a></p>
+
+<h2 id="solving-the-problem">Solving the problem</h2>
+
+<p>I started by looking at the files, and saw some familiar looking group operations
+that looked like elliptic-curve cryptography (ECC).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">G_add</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">A</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">B</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">x1</span><span class="o">*</span><span class="n">x2</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">y1</span><span class="o">*</span><span class="n">y2</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="o">*</span><span class="n">y2</span> <span class="o">+</span> <span class="n">x2</span><span class="o">*</span><span class="n">y1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y1</span><span class="o">*</span><span class="n">y2</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">G_mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">G_add</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">G_add</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">get_elem</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">D</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">d</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">kronecker</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">Zmod</span><span class="p">(</span><span class="n">p</span><span class="p">)(</span><span class="n">d</span><span class="p">)))</span> <span class="o">*</span> <span class="n">inverse_mod</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>The flag was encoded by splitting the 48 byte input into 6 segments of 8 bytes long, and
+summed them together with the group operation. 
+We need to first solve the discrete log problem to recover the coefficients of the summands,
+then somehow recover the summands.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">FLAG</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'flag.txt'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">).</span><span class="n">read</span><span class="p">().</span><span class="n">strip</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span> <span class="o">%</span> <span class="mi">8</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="n">M</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">FLAG</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">],</span> <span class="s">'big'</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">FLAG</span><span class="p">),</span> <span class="mi">8</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">FLAG</span> <span class="o">=</span> <span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">M</span> <span class="o">=</span> <span class="si">}</span><span class="s">'</span><span class="p">)</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="p">[</span><span class="n">rand_element</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">M</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">gi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">G</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">G_add</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">G_mul</span><span class="p">(</span><span class="n">gi</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="solving-the-discrete-log-problem">Solving the discrete log problem</h3>
+
+<p>I thought it was ECC but on closer inspection, the <code class="language-plaintext highlighter-rouge">get_element</code> function looks a little funny.
+The equation suggests that we’re working with some curve where \(y\) satisfies
+the equation (over \(\mathbb{Z}_p\)):</p>
+
+\[y =\frac{1}{D}(x + \sqrt{(D+1)x^2  - D})\]
+
+<p>Simplifying and rearanging we get</p>
+
+\[Dy^2 - 2xy -x^2 + 1 = 0\]
+
+<p>This is not an elliptic curve, this is a hyperbola! I had no idea that you could define
+a group structure over hyperbolas of this form, so as a sanity check, I 
+wrote a short function to check that all operations done in the encoding were on the curve.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_curve</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">A</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">D</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">p</span> <span class="o">==</span><span class="mi">0</span>
+</code></pre></div></div>
+
+<p>Furthermore, \((1, 0)\) seemed to be the identity element.
+All the points were on the curve so all signs pointed towards this being some funny 
+group operation.
+Since this challenge was called yadlp, I assumed we needed to take discrete logs
+in this group. Hopefully the group order would be relatively nice to take discrete logs.
+However I had no idea what the order of group even was!</p>
+
+<p>I couldn’t get much further from staring at this curve and group law, so I 
+started putting search terms in google like “hyperbolic curve encryption”. 
+After some digging around I found <a href="https://doi.org/10.2991/icmt-13.2013.26">this obscure paper</a>
+where they propose a cryptosystem based on Pell’s equations (\(x^2 - Dy^2 = 1\)) with a 
+very similar looking group addition operation to what was in the code.</p>
+
+<p>Notably, they claim that if \(p\equiv 3\pmod 4\), then the group order would be \(p+1\), 
+which our prime is. I verified quickly that \((p+1)G = (1,0)\) for any group element \(G\)
+I tested, so I could reasonably believe that this was the group order.</p>
+
+<p>Throwing \(p+1\) into factordb gave a very nice looking factorization with small primes.
+(I learned afterwards this is called a smooth number, specifically a \(2^{32}\)-smooth number.)</p>
+
+\[\begin{align*}  p+1 
+= 2^4 &amp;\cdot 3^3 \cdot 3271 \cdot 18119 \cdot 23857 \cdot 35923 \cdot 1505323 \cdot 3036643 \cdot 3878597 \cdot 7306661 \cdot 661850419 
+\\ &amp; \;\cdot 696183413 \cdot 737026033 \cdot 748888849 \cdot 764475661 \cdot 790916521 \cdot 1000657271 
+\\ &amp; \;\cdot 1016247923 \cdot 1213865039 \cdot 2090081803 \cdot 3882107087 \cdot 4012893277 
+\end{align*}\]
+
+<p>Now we can solve the discrete log problem with <a href="https://en.wikipedia.org/wiki/Pohlig%E2%80%93Hellman_algorithm">Pohlig-Hellman</a> in time proportional to square root of the largest factor of \(p+1\). 
+We need a basepoint, but we can just pick a random point (which is already in the code) and 
+hope that it generates the group (it will likely be the case, we can restart if we fail).
+Fortunately Sagemath had a generic version of discrete_log that implemented this, all we needed 
+was to pass in:</p>
+
+<ol>
+  <li>The group operation - <code class="language-plaintext highlighter-rouge">G_add</code></li>
+  <li>The identity element - \((1, 0)\)</li>
+  <li>The inverse function -  <code class="language-plaintext highlighter-rouge">lambda x: G_mul(p, x)</code></li>
+</ol>
+
+<p>Unfortunately, somebody changed the sage library function at some point and made it not so 
+generic. Took me a while to figure out why I kept getting python errors until I looked at
+the source code and realized it didn’t even try to use the operations I passed in and instead
+tried to use the <code class="language-plaintext highlighter-rouge">**</code> operation (I should submit a ticket and maybe try to submit a fix). 
+Instead I searched elsewhere for a discrete_log method.
+I went and modified the commented out <code class="language-plaintext highlighter-rouge">old_discrete_log</code> method I found in <a href="https://github.com/sagemath/sagelib/blob/master/sage/groups/generic.py">a super outdated version of the sage library</a> that
+I stumbled across on Google. It worked!</p>
+
+<h3 id="solving-the-modular-knapsack-problem">Solving the Modular Knapsack Problem</h3>
+<p>Now we’re still not done yet, we had to solve the following problem (which I learned afterwards was called the Modular Knapsack Problem) where \(a, b, ..., e\) were known, and \(x_0, ... x_5\) were
+numbers that were at most \(2^{64}\) (pretty small compared to \(p\)).</p>
+
+\[a x_0 + b x_1 + c x_2 + d x_3 + e x_4 + f x_5 \equiv e \pmod{p+1}\]
+
+<p>At first I thought you could choose a new generator to get a system of equations with different 
+coefficients and use Gaussian elimination, but after implementing that I realized I was dumb.
+Choosing a new generator would just multiply all the coefficients by a constant factor.</p>
+
+<p>It was back to the drawing board for me
+until Robert suggested to “use lattices” and had some code handy
+that conveniently solved this exact problem 
+(<a href="https://github.com/nneonneo/pwn-stuff/blob/master/math/solvelinmod.py">https://github.com/nneonneo/pwn-stuff/blob/master/math/solvelinmod.py</a>).</p>
+
+<p>(I really should learn how <a href="https://en.wikipedia.org/wiki/Lenstra%E2%80%93Lenstra%E2%80%93Lov%C3%A1sz_lattice_basis_reduction_algorithm">LLL reduction</a> works at some point by trying to code it myself)</p>
+
+<p>It worked perfectly and spat out the flag!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DUCTF{a_1337_hyp3rb0la_m33ts_th3_mult1pl3_DLP!!}
+</code></pre></div></div>
+
+<p>Complete sage solve script:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">solvelinmod</span>
+
+<span class="k">def</span> <span class="nf">G_add</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">A</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">B</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">x1</span><span class="o">*</span><span class="n">x2</span> <span class="o">+</span> <span class="n">D</span><span class="o">*</span><span class="n">y1</span><span class="o">*</span><span class="n">y2</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="o">*</span><span class="n">y2</span> <span class="o">+</span> <span class="n">x2</span><span class="o">*</span><span class="n">y1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y1</span><span class="o">*</span><span class="n">y2</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">G_mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">G_add</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">G_add</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">get_elem</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">D</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">d</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">kronecker</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">Zmod</span><span class="p">(</span><span class="n">p</span><span class="p">)(</span><span class="n">d</span><span class="p">)))</span> <span class="o">*</span> <span class="n">inverse_mod</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">rand_element</span><span class="p">():</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">D</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">d</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">kronecker</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">Zmod</span><span class="p">(</span><span class="n">p</span><span class="p">)(</span><span class="n">d</span><span class="p">)))</span> <span class="o">*</span> <span class="n">inverse_mod</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_curve</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">A</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">D</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">p</span> <span class="o">==</span><span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">G_mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="n">D</span> <span class="o">=</span> <span class="mi">13337</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">17568142778435152362975498611159042138909402642078949814477371651322179417849164549408357464774644525711780515232117470272550677945089719112177956836141583</span>
+<span class="n">G</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">8249149405495350491346934933585109414510787432598250096114687570379053133508711862485128035174547571919256235441699899388417666835599315963507480727674285</span><span class="p">,</span> <span class="mi">10151966144947987666795899106244951506314545969111450078363915090201899029695981970354886015549281568762501638756950135017679627954071369058817947706039379</span><span class="p">),</span> <span class="p">(</span><span class="mi">10148658254415475588279956574772196898575718154643967163626694400363009168529645860280959810873028393970853643723425023678857408220330929116526467295542507</span><span class="p">,</span> <span class="mi">3332426625916817700349475905733631656792492189677766534230576987725484499618918928882667666640821403823057239790395654518704427126712280655564669757208129</span><span class="p">),</span> <span class="p">(</span><span class="mi">1839326681086939925214853980855626023120414606039474419455499625885357274275815189399880356995376514021329118829062071144818562457268892324773839713533977</span><span class="p">,</span> <span class="mi">17502649671831125396398431215302241914145169143474764941575812028922929277656849105757332346628455059539582448544435155655055157181361580680672298566085040</span><span class="p">),</span> <span class="p">(</span><span class="mi">3165955958968203879237344349962533642598441044481692770147807839372942715856047580766073222297692574025922260374409920417665600069665162502514403188432579</span><span class="p">,</span> <span class="mi">9382092026348588885644924948782239369051861025018411316856012639637274661831713783735305424388410778778529413114167923397187236739639802371814632949741663</span><span class="p">),</span> <span class="p">(</span><span class="mi">8500294063291124527108623281980255870507549734362604259645984044370658620385351338711051998886026260657132944353675335178871934798200163035190278483491633</span><span class="p">,</span> <span class="mi">7641198814027309580920446604109217188703337221305342467525089149977505415741300885194767452232679123441594451455097533000754553745051816419202345186703390</span><span class="p">),</span> <span class="p">(</span><span class="mi">12352685673550986453697035560006632628194788902921398545668828437339873544223895997440585227838919968929669738393535610103382084842900404005432007637193943</span><span class="p">,</span> <span class="mi">2453949984320580417885537763124479618094084392655766673219227195157341323190069350175423869908524758510177197973709821798974003013596311361995273762475822</span><span class="p">)]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5388567167658786935158413401674168420144429277172064721472662913563775670320298461949979362402157764272762755236320989018989446360740720072488623102776015</span><span class="p">,</span> <span class="mi">7420389277336940268114831002964626027945367662485419944369852006741899961686908509331719915794976159062761271182318814519641566938538911041229521838799714</span><span class="p">)</span>
+
+<span class="n">order</span> <span class="o">=</span> <span class="n">p</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="n">factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span> <span class="p">,</span> <span class="mi">3</span><span class="o">**</span><span class="mi">3</span> <span class="p">,</span> <span class="mi">3271</span> <span class="p">,</span> <span class="mi">18119</span> <span class="p">,</span> <span class="mi">23857</span> <span class="p">,</span> <span class="mi">35923</span> <span class="p">,</span> <span class="mi">1505323</span> <span class="p">,</span> <span class="mi">3036643</span> <span class="p">,</span> <span class="mi">3878597</span> <span class="p">,</span> <span class="mi">7306661</span> <span class="p">,</span> <span class="mi">661850419</span> <span class="p">,</span> <span class="mi">696183413</span> <span class="p">,</span> <span class="mi">737026033</span> <span class="p">,</span> <span class="mi">748888849</span> <span class="p">,</span> <span class="mi">764475661</span> <span class="p">,</span> <span class="mi">790916521</span> <span class="p">,</span> <span class="mi">1000657271</span> <span class="p">,</span> <span class="mi">1016247923</span> <span class="p">,</span> <span class="mi">1213865039</span> <span class="p">,</span> <span class="mi">2090081803</span> <span class="p">,</span> <span class="mi">3882107087</span> <span class="p">,</span> <span class="mi">4012893277</span><span class="p">]</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">prod</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span> <span class="o">==</span> <span class="n">order</span><span class="p">)</span>
+
+<span class="n">zero</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">multiplication_names</span> <span class="o">=</span> <span class="p">(</span> <span class="s">'multiplication'</span><span class="p">,</span> <span class="s">'times'</span><span class="p">,</span> <span class="s">'product'</span><span class="p">,</span> <span class="s">'*'</span><span class="p">)</span>
+<span class="n">addition_names</span>       <span class="o">=</span> <span class="p">(</span> <span class="s">'addition'</span><span class="p">,</span> <span class="s">'plus'</span><span class="p">,</span> <span class="s">'sum'</span><span class="p">,</span> <span class="s">'+'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">old_discrete_log</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s">'*'</span><span class="p">,</span>
+                          <span class="n">identity</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+     <span class="n">b</span> <span class="o">=</span> <span class="n">base</span>
+
+     <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">inv</span><span class="p">,</span> <span class="n">mul</span><span class="p">,</span> <span class="n">neg</span><span class="p">,</span> <span class="n">add</span>
+     <span class="n">Z</span> <span class="o">=</span> <span class="n">Integers</span><span class="p">()</span>
+
+     <span class="k">if</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">multiplication_names</span><span class="p">:</span>
+         <span class="n">identity</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">parent</span><span class="p">()(</span><span class="mi">1</span><span class="p">)</span>
+         <span class="n">inverse</span>  <span class="o">=</span> <span class="n">inv</span>
+         <span class="n">op</span> <span class="o">=</span> <span class="n">mul</span>
+         <span class="k">if</span> <span class="nb">ord</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+             <span class="nb">ord</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">multiplicative_order</span><span class="p">()</span>
+     <span class="k">elif</span> <span class="n">operation</span> <span class="ow">in</span> <span class="n">addition_names</span><span class="p">:</span>
+         <span class="n">identity</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">parent</span><span class="p">()(</span><span class="mi">0</span><span class="p">)</span>
+         <span class="n">inverse</span>  <span class="o">=</span> <span class="n">neg</span>
+         <span class="n">op</span> <span class="o">=</span> <span class="n">add</span>
+         <span class="k">if</span> <span class="nb">ord</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+             <span class="nb">ord</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">order</span><span class="p">()</span>
+     <span class="k">else</span><span class="p">:</span>
+         <span class="k">if</span> <span class="nb">ord</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">identity</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">inverse</span><span class="o">==</span><span class="bp">None</span> <span class="ow">or</span> <span class="n">op</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+             <span class="k">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">inverse</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+
+     <span class="k">if</span> <span class="nb">ord</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+         <span class="n">c</span> <span class="o">=</span> <span class="n">identity</span>
+         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">ord</span><span class="p">):</span>
+             <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">a</span><span class="p">:</span>        <span class="c1"># is b^i
+</span>                 <span class="k">return</span> <span class="n">Z</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+             <span class="n">c</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+     <span class="n">m</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">.</span><span class="n">isqrt</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span>  <span class="c1"># we need sqrt(ord) rounded up
+</span>     <span class="n">table</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>     <span class="c1"># will hold pairs (b^j,j) for j in range(m)
+</span>     <span class="n">g</span> <span class="o">=</span> <span class="n">identity</span>       <span class="c1"># will run through b**j    
+</span>     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+         <span class="k">if</span> <span class="n">a</span><span class="o">==</span><span class="n">g</span><span class="p">:</span>
+             <span class="k">return</span> <span class="n">Z</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>           
+         <span class="n">table</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+         <span class="n">g</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+     <span class="n">g</span> <span class="o">=</span> <span class="n">inverse</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>     <span class="c1"># this is now b**(-m)
+</span>     <span class="n">h</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>        <span class="c1"># will run through a*g**i = a*b**(-i*m)
+</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">):</span>
+         <span class="n">j</span> <span class="o">=</span> <span class="n">table</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+         <span class="k">if</span> <span class="ow">not</span> <span class="n">j</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>  <span class="c1"># then a*b**(-i*m) == b**j
+</span>             <span class="k">return</span> <span class="n">Z</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">m</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
+         <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+             <span class="n">h</span> <span class="o">=</span> <span class="n">op</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">d_log</span><span class="p">(</span><span class="n">q</span><span class="p">):</span> 
+    <span class="k">print</span><span class="p">(</span><span class="s">"dlogging: "</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+    <span class="n">dlogs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">order</span><span class="o">//</span><span class="n">f</span>
+        <span class="n">qt</span> <span class="o">=</span> <span class="n">G_mul</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">gent</span> <span class="o">=</span> <span class="n">G_mul</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">dlog</span> <span class="o">=</span> <span class="n">old_discrete_log</span><span class="p">(</span><span class="n">qt</span><span class="p">,</span> <span class="n">gent</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s">'NONE'</span><span class="p">,</span>
+                            <span class="n">op</span><span class="o">=</span><span class="n">G_add</span><span class="p">,</span> <span class="n">identity</span><span class="o">=</span><span class="n">zero</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="n">inverse</span><span class="p">)</span>
+        <span class="n">dlogs</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dlog</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">None</span> <span class="ow">in</span> <span class="n">dlogs</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">"oh no"</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">CRT_list</span><span class="p">(</span><span class="n">dlogs</span><span class="p">,</span> <span class="n">factors</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">l</span>
+
+<span class="c1"># This one worked
+</span><span class="n">gen</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1306220711535023766817529329601851834684473168538006969205607217300581985606511824830746054324343087425816093230309507256982431519166958670991896717613121</span><span class="p">,</span> <span class="mi">2753498082952557748021507097242652783238834762442333661230349459126933713491167991334695072154480164453278454296466352910947274843516626885289923809047182</span><span class="p">)</span>
+<span class="n">ords</span> <span class="o">=</span> <span class="p">[</span><span class="n">d_log</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">G</span><span class="p">]</span>
+<span class="n">ordc</span> <span class="o">=</span> <span class="n">d_log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s">'x0'</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s">'x1'</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s">'x2'</span><span class="p">)</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s">'x3'</span><span class="p">)</span>
+<span class="n">x4</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s">'x4'</span><span class="p">)</span>
+<span class="n">x5</span> <span class="o">=</span> <span class="n">var</span><span class="p">(</span><span class="s">'x5'</span><span class="p">)</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="p">(</span><span class="n">ords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x0</span> <span class="o">+</span> <span class="n">ords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x1</span> <span class="o">+</span> <span class="n">ords</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">x2</span> <span class="o">+</span> <span class="n">ords</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">x3</span> <span class="o">+</span> <span class="n">ords</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">*</span><span class="n">x4</span> <span class="o">+</span> <span class="n">ords</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">*</span><span class="n">x5</span> <span class="o">==</span> <span class="n">ordc</span><span class="p">)</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">{</span><span class="n">x0</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">,</span> <span class="n">x1</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">,</span> <span class="n">x3</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">,</span> <span class="n">x4</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">,</span> <span class="n">x5</span><span class="p">:</span> <span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">}</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solvelinmod</span><span class="p">.</span><span class="n">solve_linear_mod</span><span class="p">([(</span><span class="n">eq</span><span class="p">,</span> <span class="n">order</span><span class="p">)],</span> <span class="n">bounds</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">sol</span> <span class="o">=</span> <span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="sa">b</span><span class="s">""</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sol</span><span class="p">:</span>
+    <span class="n">flag</span><span class="o">+=</span><span class="nb">int</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">key</span><span class="p">]).</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s">'big'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/2021/09/27/ductf-yadlp.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Da Wei (David) Zheng</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Da Wei (David) Zheng</li><li><a class="u-email" href="mailto:dwzheng2 atsymbl illinois doot edu">dwzheng2 atsymbl illinois doot edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zhengdw"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zhengdw</span></a></li><li><a href="https://www.linkedin.com/in/zhengdw"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zhengdw</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>PhD student studying theoretical computer science  at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+  </body>
+
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>[SekaiCTF 2022] Diffecient | Da Wei (David) Zheng</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="[SekaiCTF 2022] Diffecient" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="[SekaiCTF 2022] Diffecient" />
+<meta property="og:description" content="[SekaiCTF 2022] Diffecient" />
+<link rel="canonical" href="/2022/10/03/sekaictf-diffecient.html" />
+<meta property="og:url" content="/2022/10/03/sekaictf-diffecient.html" />
+<meta property="og:site_name" content="Da Wei (David) Zheng" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-03T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="[SekaiCTF 2022] Diffecient" />
+<script type="application/ld+json">
+{"headline":"[SekaiCTF 2022] Diffecient","dateModified":"2022-10-03T00:00:00-05:00","datePublished":"2022-10-03T00:00:00-05:00","url":"/2022/10/03/sekaictf-diffecient.html","mainEntityOfPage":{"@type":"WebPage","@id":"/2022/10/03/sekaictf-diffecient.html"},"@type":"BlogPosting","description":"[SekaiCTF 2022] Diffecient","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Da Wei (David) Zheng" /><script type="text/javascript" async
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+</head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Da Wei (David) Zheng</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog.html">Blog</a><a class="page-link" href="/publications.html">Publications</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">[SekaiCTF 2022] Diffecient</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2022-10-03T00:00:00-05:00" itemprop="datePublished">Oct 3, 2022
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="sekaictf-2022-diffecient">[SekaiCTF 2022] Diffecient</h1>
+
+<h2 id="tldr">tl;dr</h2>
+
+<p>Find a hash collision for a bloom filter using <a href="https://en.wikipedia.org/wiki/MurmurHash">MurmurHash3</a> aka mmh3.
+I got first blood on the challenge by being too lazy to do cryptanalysis and instead using the powers of OSINT to find an existing solutions coded by real cryptographers.</p>
+
+<h2 id="description">Description</h2>
+
+<p>crypto/Diffecient; 7 solves, 498 points</p>
+
+<p>Challenge author: <code class="language-plaintext highlighter-rouge">deut-erium</code></p>
+
+<p>Welcome to the Diffecient Security Key Database API, for securely and efficiently saving tons of long security keys! Feel free to query your security keys, and pay a little to add your own to our state-of-the-art database.</p>
+
+<p>We trust our product so much that we even save our own keys here!</p>
+
+<p>Source code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">mmh3</span>
+
+<span class="k">def</span> <span class="nf">randbytes</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="k">return</span> <span class="nb">bytes</span> <span class="p">([</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+<span class="k">class</span> <span class="nc">BloomFilter</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">hash_func</span><span class="o">=</span><span class="n">mmh3</span><span class="p">.</span><span class="nb">hash</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">__m</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">__k</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">__i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">__digests</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">hash</span> <span class="o">=</span> <span class="n">hash_func</span>
+
+    <span class="k">def</span> <span class="nf">security</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">false_positive</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span>
+            <span class="mi">1</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">e</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="p">.</span><span class="n">__k</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">__i</span> <span class="o">/</span> <span class="bp">self</span><span class="p">.</span><span class="n">__m</span><span class="p">),</span> <span class="bp">self</span><span class="p">.</span><span class="n">__k</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">false_positive</span><span class="p">).</span><span class="n">bit_length</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="nb">ZeroDivisionError</span><span class="p">,</span> <span class="nb">OverflowError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s">'inf'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">__i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">__k</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">__digests</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">__m</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">__m</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">__digests</span>
+                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">__k</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">num_passwords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">__i</span>
+
+    <span class="k">def</span> <span class="nf">memory_consumption</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">__digests</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">PasswordDB</span><span class="p">(</span><span class="n">BloomFilter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">security</span><span class="p">,</span> <span class="n">hash_func</span><span class="o">=</span><span class="n">mmh3</span><span class="p">.</span><span class="nb">hash</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">hash_func</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">add_keys</span><span class="p">(</span><span class="n">security</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">addition_quota</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">added_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">add_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thresh_security</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="p">.</span><span class="n">security</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">thresh_security</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">_add</span><span class="p">(</span><span class="n">randbytes</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Added {} security keys to DB"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">num_passwords</span><span class="p">()))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Original size of keys {} KB vs {} KB in DB"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">num_passwords</span><span class="p">()</span><span class="o">//</span><span class="mi">4</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">memory_consumption</span><span class="p">()</span><span class="o">//</span><span class="mi">1024</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">check_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">".{32,}"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should be atleast 32 characters long"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">"(?=.*[a-z])"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 lowercase character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">"(?=.*[A-Z])"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 uppercase character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">br</span><span class="s">"(?=.*\d)"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 digit character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">br</span><span class="s">"(?=.*\W)"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 special character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">added_keys</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin account restricted for free tier"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">check</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">query_db</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">check</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Key present in DB"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Key not present in DB"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">addition_quota</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">_add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">added_keys</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">addition_quota</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"key added successfully to DB"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"API quota exceeded"</span><span class="p">)</span>
+
+
+<span class="n">BANNER</span> <span class="o">=</span> <span class="sa">r</span><span class="s">"""
+ ____  ____  ____  ____  ____  ___  ____  ____  _  _  ____
+(  _ \(_  _)( ___)( ___)( ___)/ __)(_  _)( ___)( \( )(_  _)
+ )(_) )_)(_  )__)  )__)  )__)( (__  _)(_  )__)  )  (   )(
+(____/(____)(__)  (__)  (____)\___)(____)(____)(_)\_) (__)
+
+Welcome to diffecient security key database API for securely
+and efficiently saving tonnes of long security keys!
+Feel FREE to query your security keys and pay a little to
+add your own security keys to our state of the art DB!
+We trust our product so much that we even save our own keys here
+"""</span>
+<span class="k">print</span><span class="p">(</span><span class="n">BANNER</span><span class="p">)</span>
+<span class="n">PASSWORD_DB</span> <span class="o">=</span> <span class="n">PasswordDB</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">32</span> <span class="o">-</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">768</span><span class="p">,</span> <span class="n">mmh3</span><span class="p">.</span><span class="nb">hash</span><span class="p">)</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">option</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Enter API option:</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Enter key in hex</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+            <span class="n">PASSWORD_DB</span><span class="p">.</span><span class="n">query_db</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Enter key in hex</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+            <span class="n">PASSWORD_DB</span><span class="p">.</span><span class="n">add_sample</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Enter key in hex</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">PASSWORD_DB</span><span class="p">.</span><span class="n">check_admin</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+                <span class="kn">from</span> <span class="nn">flag</span> <span class="kn">import</span> <span class="n">flag</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"No Admin no flag"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Something wrong happened"</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="first-impressions-of-the-problem">First impressions of the problem</h2>
+
+<p>We’re given a bunch of code that implements a password database that stores passwords
+using <a href="https://en.wikipedia.org/wiki/MurmurHash">MurmurHash3</a> in a <a href="https://en.wikipedia.org/wiki/Bloom_filter">bloom filter</a>.
+The exact way insertions into the bloom filter is done is with:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">__i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">__k</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">__digests</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">__m</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The bloom filter calls MurmurHash3 47 times with the second parameter being the seed (in this case the seeds are 0 to 46).</p>
+
+<p>We’re allowed to add exactly one thing to the bloom filter.
+We can also check if a password is in the bloom filter, if it is, we get the flag!
+However, we need to make sure we pass the <code class="language-plaintext highlighter-rouge">check_admin</code> function to do so:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">def</span> <span class="nf">check_admin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">".{32,}"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should be atleast 32 characters long"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">"(?=.*[a-z])"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 lowercase character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">"(?=.*[A-Z])"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 uppercase character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">br</span><span class="s">"(?=.*\d)"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 digit character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">br</span><span class="s">"(?=.*\W)"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 special character"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">added_keys</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Admin account restricted for free tier"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">check</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">check_admin</code> function ensures the password is 32 characters long, and contains some characters, and 
+that we didn’t add the key ourself. 
+Due to the nature of the hashing usages,
+if we add a password and find another password hashing to the same value (aka a hash collision),
+we wouldn’t have added the key ourselves, and it would be “in the database” according to the
+bloom filter. So our goal from now is to just find a hash collisions for the first 47 hashes in the bloom filter.</p>
+
+<h2 id="playing-with-hash-collisions">Playing with hash collisions</h2>
+
+<p>The first thing we can do is play around with hashes to see if we can find a simple hash collision in the bloom filter.</p>
+
+<p>Very quickly, after playing around with some zero bytes, I find one:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mmh3</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">check_admin</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">".{32,}"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should be atleast 32 characters long"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">"(?=.*[a-z])"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 lowercase character"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">b</span><span class="s">"(?=.*[A-Z])"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 uppercase character"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">br</span><span class="s">"(?=.*\d)"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 digit character"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="sa">br</span><span class="s">"(?=.*\W)"</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Admin key should contain atleast 1 special character"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s">'0000'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">'000000'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">47</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">mmh3</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">i</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">47</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">mmh3</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="n">i</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">check_admin</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">check_admin</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>The hashes aren’t actually colliding for the same seeds, but are colliding at different seeds in a way that somehow works.
+Unfortunately, this doesn’t really help, both passwords clearly fails <code class="language-plaintext highlighter-rouge">check_admin</code>  for obvious reasons.
+Furthermore, it isn’t clear how we can extend this collision into a longer and fulfil all the conditions of length and character content.</p>
+
+<p>Back to the drawing board, I decided to do some OSINT.</p>
+
+<h2 id="osint-about-hash-collisions">OSINT about hash collisions</h2>
+
+<p>The best place to start any search is on Wikipedia, 
+so I begin with the <a href="https://en.wikipedia.org/wiki/MurmurHash">Wikipedia page on MurmurHash</a>.
+Reading through, I notice a section on <a href="https://en.wikipedia.org/wiki/MurmurHash#Vulnerabilities">Vulnerabilities of MurmurHash</a>.
+The page mentions a collision attack found by two cryptographers Jean-Philippe Aumasson and Daniel J. Bernstein
+where even randomized seeds were vulnerable. This is great, since if it works for random seeds, it basically means that it would work for “most” seeds, including the seeds from 0 to 46.</p>
+
+<p>The wikipedia lists a single citation to <a href="https://emboss.github.io/blog/2012/12/14/breaking-murmur-hash-flooding-dos-reloaded/">a blog by Martin Boßlet from 2012</a> 
+where he provides a ruby script, and lists some hash collisions.
+Unfortunately, its for MurmurHash2, which is different, and his collisions don’t work for MurmurHash3. 
+The blog said similar techniques are possible, but I don’t feel like (or really know how to) perform cryptanalysis to do something similar.</p>
+
+<p>We’re not completely out of luck as the blog mentions results Aumasson and Bernstein “completely breaking” MurmurHash3 by finding multicollision hashes and providing implementations of it at the following URL: <a href="https://131002.net/siphash/#at">https://131002.net/siphash/#at</a>. Following the URL unfortuantely redirects to the <a href="https://www.aumasson.jp/#at">homepage of JP Aumasson</a>, and clicking the SipHash link on his homepage just goes to the Wikipedia page for SipHash. 
+It seemed like Aumasson must have reorganized his web pages, so we’re out of luck here.</p>
+
+<p>Or are we? Good thing the <a href="https://archive.org/web/">Internet Archive</a> exists, we’ll just use the Wayback Machine to travel back in time before he reorganized his web page (assuming the page at some point got a lot of traffic).
+Fortunately for us it got <a href="https://web.archive.org/web/20180401000000*/131002.net/siphash">lots of traffic in 2018</a> and sporadically in other years. On the website he provides some <a href="https://web.archive.org/web/20180901061338/https://131002.net/siphash/murmur3collisions-20120827.tar.gz">C++ code to find universal (key-independent) hash collisions</a>, which is exactly what I want.</p>
+
+<p>After downloading and untarring, I inspected the source code and am greeted with the following comment:</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * multicollisions for MurmurHash3
+ *
+ * MurmurHash3 C++ implementation is available at 
+ * http://code.google.com/p/smhasher/wiki/MurmurHash3
+ *
+ * the function Murmur3Multicollisions finds many different inputs
+ * hashing to the same 32-bit value (multicollision)
+ * 
+ * example output:
+ * 32-bit seed 7a0e823a
+ * 4-multicollision
+ * 16-byte inputs
+ * MurmurHash3_x86_32( bdd0c04b5c3995827482773b12acab35 ) = 94d7cf1b
+ * MurmurHash3_x86_32( 652fa0565c3946be7482773b12acab35 ) = 94d7cf1b
+ * MurmurHash3_x86_32( bdd0c04b5c399582cc23983012ac5c71 ) = 94d7cf1b
+ * MurmurHash3_x86_32( 652fa0565c3946becc23983012ac5c71 ) = 94d7cf1b
+ *
+ * the multicollisions found are "universal": they work for any seed/key
+ *
+ * authors:
+ * Jean-Philippe Aumasson, Daniel J. Bernstein
+ */</span>
+</code></pre></div></div>
+
+<p>Huh, so they provide some example 16-byte input that cause hash collisions. However we need 32-byte collisions.
+The natural next step was to look through the code to try to see if I can easily change some parameter in their code to change it to 32-byte collisions (it looks like it would be trivial to, but I never even bothered running their code). 
+Instead I figure I’d try to see if the 16-byte collisions they found extended to 32-byte ones, by just doubling them (adding a copy of themselves to the end).
+This might be a strange thing to try, but these sorts of hashes that shift bits around are usually very amenable to
+length extension type attacks, so it seemed to be a reasonable thing to try.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">a</span> <span class="o">=</span> <span class="s">'bdd0c04b5c3995827482773b12acab35'</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">'652fa0565c3946be7482773b12acab35'</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">a</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">+</span><span class="n">b</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">47</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">mmh3</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">i</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">47</span><span class="p">):</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">mmh3</span><span class="p">.</span><span class="nb">hash</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="n">i</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">check_admin</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">check_admin</span><span class="p">(</span><span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>The output was:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bdd0c04b5c3995827482773b12acab35bdd0c04b5c3995827482773b12acab35
+652fa0565c3946be7482773b12acab35652fa0565c3946be7482773b12acab35
+47
+True
+True
+</code></pre></div></div>
+
+<p>Wow, it just worked somehow! 
+It consisted of some random bytes, so it’s not surprising it passed all the other checks,
+but the fact that it hashes to the same values is surprising.
+So I just plugged it into the program and out popped the flag:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+ ____  ____  ____  ____  ____  ___  ____  ____  _  _  ____
+(  _ \(_  _)( ___)( ___)( ___)/ __)(_  _)( ___)( \( )(_  _)
+ )(_) )_)(_  )__)  )__)  )__)( (__  _)(_  )__)  )  (   )(
+(____/(____)(__)  (__)  (____)\___)(____)(____)(_)\_) (__)
+
+Welcome to diffecient security key database API for securely
+and efficiently saving tonnes of long security keys!
+Feel FREE to query your security keys and pay a little to
+add your own security keys to our state of the art DB!
+We trust our product so much that we even save our own keys here
+
+Added 1102 security keys to DB
+Original size of keys 275 KB vs 202 KB in DB
+Enter API option:
+2
+Enter key in hex
+bdd0c04b5c3995827482773b12acab35bdd0c04b5c3995827482773b12acab35
+key added successfully to DB
+Enter API option:
+3                                                               
+Enter key in hex
+652fa0565c3946be7482773b12acab35652fa0565c3946be7482773b12acab35
+b'SEKAI{56f066a1b13fd350ac4a4889efe22cb1825651843e9d0ccae0f87844d1d65190}'
+</code></pre></div></div>
+
+<p>Neato, I solved (and in fact got first blood) on a cryptography challenge without doing any of my own cryptanalysis, writing any real code, or even running any real code.</p>
+
+
+  </div><a class="u-url" href="/2022/10/03/sekaictf-diffecient.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Da Wei (David) Zheng</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Da Wei (David) Zheng</li><li><a class="u-email" href="mailto:dwzheng2 atsymbl illinois doot edu">dwzheng2 atsymbl illinois doot edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zhengdw"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zhengdw</span></a></li><li><a href="https://www.linkedin.com/in/zhengdw"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">zhengdw</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>PhD student studying theoretical computer science  at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+  </body>
+
+</html>
