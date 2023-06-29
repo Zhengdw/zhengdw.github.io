@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Publications" />
 <script type="application/ld+json">
-{"headline":"Publications","url":"/publications.html","@type":"WebPage","description":"PhD student studying theoretical computer science at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.","@context":"https://schema.org"}</script>
+{"@type":"WebPage","url":"/publications.html","headline":"Publications","description":"PhD student studying theoretical computer science at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Da Wei (David) Zheng" /><script type="text/javascript" async
    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -142,13 +142,14 @@ function toggleBibtexChanZ23(parameter) {
 </li>
 <li><div class="text-justify">
   <span id="ZhengH23"><b>D. W. Zheng</b> and M. Henzinger, “Multiplicative Auction Algorithm for Approximate Maximum Weight Bipartite
-               Matching,” <i>CoRR</i>, vol. abs/2301.09217, 2023.</span>
+                  Matching,” in <i>Integer Programming and Combinatorial Optimization - 24th International
+                  Conference, IPCO 2023, Madison, WI, USA, June 21-23, 2023, Proceedings</i>, 2023, vol. 13904, pp. 453–465.</span>
 </div>
 <button class="button0" onclick="toggleBibtexZhengH23()">Bibtex</button>
 
  
 
-    <a href="http://doi.org/10.48550/arXiv.2301.09217"><input class="button1" type="button" value="doi" /></a>
+    <a href="http://doi.org/10.1007/978-3-031-32726-1_32"><input class="button1" type="button" value="doi" /></a>
 
  
 
@@ -159,21 +160,23 @@ function toggleBibtexChanZ23(parameter) {
  
 
 <div id="aZhengH23" style="display: none;">
-<pre>@article{ZhengH23,
+<pre>@inproceedings{ZhengH23,
   author = {Zheng, Da Wei and Henzinger, Monika},
+  editor = {Pia, Alberto Del and Kaibel, Volker},
   title = {Multiplicative Auction Algorithm for Approximate Maximum Weight Bipartite
-                 Matching},
-  journal = {CoRR},
-  volume = {abs/2301.09217},
+                    Matching},
+  booktitle = {Integer Programming and Combinatorial Optimization - 24th International
+                    Conference, {IPCO} 2023, Madison, WI, USA, June 21-23, 2023, Proceedings},
+  series = {Lecture Notes in Computer Science},
+  volume = {13904},
+  pages = {453--465},
+  publisher = {Springer},
   year = {2023},
-  url = {https://doi.org/10.48550/arXiv.2301.09217},
-  doi = {10.48550/arXiv.2301.09217},
-  eprinttype = {arXiv},
-  eprint = {2301.09217},
-  timestamp = {Thu, 26 Jan 2023 15:26:31 +0100},
-  biburl = {https://dblp.org/rec/journals/corr/abs-2301-09217.bib},
+  url = {https://doi.org/10.1007/978-3-031-32726-1\_32},
+  doi = {10.1007/978-3-031-32726-1\_32},
+  timestamp = {Fri, 26 May 2023 10:40:47 +0200},
+  biburl = {https://dblp.org/rec/conf/ipco/ZhengH23.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org},
-  note = {To appear in the Conference on Integer Programming and Combinatorial Optimization (IPCO 2023).},
   arxiv = {https://arxiv.org/abs/2301.09217}
 }
 </pre>
@@ -229,6 +232,72 @@ function toggleBibtexZhengH23(parameter) {
 <script>
 function toggleBibtexCrombezFFGGLLMSZZ23(parameter) {
     var x= document.getElementById('aCrombezFFGGLLMSZZ23');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+</script>
+</li>
+<li><div class="text-justify">
+  <span id="henzingerLVZ2023">M. Henzinger, P. Liu, J. Vondrak, and <b>D. W. Zheng</b>, “Faster submodular maximization for several classes of matroids,” <i>arXiv preprint arXiv:2305.00122</i>, 2023.</span>
+</div>
+<button class="button0" onclick="toggleBibtexhenzingerLVZ2023()">Bibtex</button>
+
+ 
+
+ 
+
+ 
+
+ 
+
+<div id="ahenzingerLVZ2023" style="display: none;">
+<pre>@article{henzingerLVZ2023,
+  title = {Faster submodular maximization for several classes of matroids},
+  author = {Henzinger, Monika and Liu, Paul and Vondrak, Jan and Zheng, Da Wei},
+  journal = {arXiv preprint arXiv:2305.00122},
+  year = {2023}
+}
+</pre>
+</div>
+<script>
+function toggleBibtexhenzingerLVZ2023(parameter) {
+    var x= document.getElementById('ahenzingerLVZ2023');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+</script>
+</li>
+<li><div class="text-justify">
+  <span id="changZ2023">Y.-J. Chang and <b>D. W. Zheng</b>, “Fully Scalable Massively Parallel Algorithms for Embedded Planar Graphs,” <i>arXiv preprint arXiv:2304.07441</i>, 2023.</span>
+</div>
+<button class="button0" onclick="toggleBibtexchangZ2023()">Bibtex</button>
+
+ 
+
+ 
+
+ 
+
+ 
+
+<div id="achangZ2023" style="display: none;">
+<pre>@article{changZ2023,
+  title = {Fully Scalable Massively Parallel Algorithms for Embedded Planar Graphs},
+  author = {Chang, Yi-Jun and Zheng, Da Wei},
+  journal = {arXiv preprint arXiv:2304.07441},
+  year = {2023}
+}
+</pre>
+</div>
+<script>
+function toggleBibtexchangZ2023(parameter) {
+    var x= document.getElementById('achangZ2023');
     if (x.style.display === 'none') {
         x.style.display = 'block';
     } else {
@@ -400,9 +469,9 @@ function toggleBibtexLiuSZZ21(parameter) {
 <h2 id="2020">2020</h2>
 
 <ul class="bibliography"><li><div class="text-justify">
-  <span id="Zheng"><b>D. W. Zheng</b>, “Scheduling queries to moving entities to certify many are distant from a region,” Master's thesis, University of British Columbia, 2020.</span>
+  <span id="ZhengMasters"><b>D. W. Zheng</b>, “Scheduling queries to moving entities to certify many are distant from a region,” Master's thesis, University of British Columbia, 2020.</span>
 </div>
-<button class="button0" onclick="toggleBibtexZheng()">Bibtex</button>
+<button class="button0" onclick="toggleBibtexZhengMasters()">Bibtex</button>
 
  
 
@@ -414,8 +483,8 @@ function toggleBibtexLiuSZZ21(parameter) {
 
  
 
-<div id="aZheng" style="display: none;">
-<pre>@mastersthesis{Zheng,
+<div id="aZhengMasters" style="display: none;">
+<pre>@mastersthesis{ZhengMasters,
   series = {Electronic Theses and Dissertations (ETDs) 2008+},
   title = {Scheduling queries to moving entities to certify many are distant from a region},
   url = {https://open.library.ubc.ca/collections/ubctheses/24/items/1.0392883},
@@ -428,8 +497,8 @@ function toggleBibtexLiuSZZ21(parameter) {
 </pre>
 </div>
 <script>
-function toggleBibtexZheng(parameter) {
-    var x= document.getElementById('aZheng');
+function toggleBibtexZhengMasters(parameter) {
+    var x= document.getElementById('aZhengMasters');
     if (x.style.display === 'none') {
         x.style.display = 'block';
     } else {
@@ -488,51 +557,6 @@ function toggleBibtexZhengSZ20(parameter) {
 </script>
 </li></ul>
 
-<p> </p>
-
-<h2 id="2019">2019</h2>
-
-<ul class="bibliography"><li><div class="text-justify">
-  <span id="Scurll">J. M. Scurll, L. Abraham, <b>D. W. Zheng</b>, R. Tafteh, K. C. Chou, M. R. Gold, and D. Coombs, “StormGraph: An automated graph-based algorithm for quantitative clustering analysis of single-molecule localization microscopy data,” <i>bioRxiv</i>, 2019.</span>
-</div>
-<button class="button0" onclick="toggleBibtexScurll()">Bibtex</button>
-
- 
-
-    <a href="http://doi.org/10.1101/515627"><input class="button1" type="button" value="doi" /></a>
-
- 
-
- 
-
- 
-
-<div id="aScurll" style="display: none;">
-<pre>@article{Scurll,
-  author = {Scurll, Joshua M. and Abraham, Libin and Zheng, Da Wei and Tafteh, Reza and Chou, Keng C. and Gold, Michael R. and Coombs, Daniel},
-  title = {StormGraph: An automated graph-based algorithm for quantitative clustering analysis of single-molecule localization microscopy data},
-  elocation-id = {515627},
-  year = {2019},
-  doi = {10.1101/515627},
-  publisher = {Cold Spring Harbor Laboratory},
-  url = {https://www.biorxiv.org/content/early/2019/01/09/515627},
-  eprint = {https://www.biorxiv.org/content/early/2019/01/09/515627.full.pdf},
-  journal = {bioRxiv},
-  notes = {Available at \url{https://www.biorxiv.org/content/10.1101/515627v3}}
-}
-</pre>
-</div>
-<script>
-function toggleBibtexScurll(parameter) {
-    var x= document.getElementById('aScurll');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
-    }
-}
-</script>
-</li></ul>
 
       </div>
     </main><footer class="site-footer h-card">

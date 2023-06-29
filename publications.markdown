@@ -25,8 +25,3 @@ title: "Publications"
 
 {% bibliography --query @*[year=2020] %}
 
-&nbsp;
-
-## 2019
-
-{% bibliography --query @*[year=2019] %}
