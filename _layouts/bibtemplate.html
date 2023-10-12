@@ -1,10 +1,27 @@
 ---
 ---
+<font size="+1"> 
+<b>
+  {{ entry.title }} 
+</b>
+  {% if entry.conference %}
+  <em>
+  ({{ entry.conference }}) 
+  </em>
+  {% endif %}
+ <br>
+</font> 
+<!-- {{ entry.author  | replace_first: 'Zheng, Da Wei', '<b>Zheng, Da Wei</b>' }}-->
+
 <div class="text-justify">
   {{ reference | replace_first: 'D. W. Zheng', '<b>D. W. Zheng</b>' }}
 </div>
+
 <button class="button0"  onclick="toggleBibtex{{entry.key}}()">Bibtex</button>
 
+{% if entry.abstract %}
+<button class="button0"  onclick="toggleAbstract{{entry.abstract}}()">Abstract</button>
+{% endif %}
  
 {% if entry.doi %}
     <a href="{{ entry.doi | prepend: 'http://doi.org/' }}"><input class="button1" type="button" value="doi" /></a>
@@ -24,9 +41,21 @@
 <div id="a{{entry.key}}" style="display: none;">
 <pre>{{entry.bibtex}}</pre>
 </div>
+
 <script>
 function toggleBibtex{{entry.key}}(parameter) {
     var x= document.getElementById('a{{entry.key}}');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+</script>
+
+<script>
+function toggleAbstract{{entry.abstract}}(parameter) {
+    var x= document.getElementById('a{{entry.abstract}}');
     if (x.style.display === 'none') {
         x.style.display = 'block';
     } else {
