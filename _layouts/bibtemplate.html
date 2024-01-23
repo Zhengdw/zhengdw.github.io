@@ -14,7 +14,7 @@
 <!-- {{ entry.author  | replace_first: 'Zheng, Da Wei', '<b>Zheng, Da Wei</b>' }}-->
 
 <div class="text-justify">
-  {{ reference | replace_first: 'D. W. Zheng', '<b>D. W. Zheng</b>' }}
+  {{ reference | replace_first: 'D. W. Zheng', '<b>Da Wei Zheng</b>' }}
 </div>
 
 <button class="button0"  onclick="toggleBibtex{{entry.key}}()">Bibtex</button>
@@ -38,6 +38,11 @@
 {% if entry.code %}
     <a href="{{ entry.code }}"><input class="button3" type="button" value="code" /></a>
 {% endif %}
+
+{% if entry.slides %}
+    <a href="{{ entry.slides }}"><input class="button3" type="button" value="slides" /></a>
+{% endif %}
+
 <div id="a{{entry.key}}" style="display: none;">
 <pre>{{entry.bibtex}}</pre>
 </div>
