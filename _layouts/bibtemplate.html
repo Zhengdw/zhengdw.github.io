@@ -4,17 +4,18 @@
 <b>
   {{ entry.title }} 
 </b>
-  {% if entry.conference %}
-  <em>
-  ({{ entry.conference }}) 
-  </em>
-  {% endif %}
- <br>
+{% if entry.conference %}
+<br>
+<em>
+({{ entry.conference }}) 
+</em>
+{% endif %}
 </font> 
 <!-- {{ entry.author  | replace_first: 'Zheng, Da Wei', '<b>Zheng, Da Wei</b>' }}-->
 
 <div class="text-justify">
-  {{ reference | replace_first: 'D. W. Zheng', '<b>Da Wei Zheng</b>' }}
+{{ entry.author  | replace_first: 'Zheng, Da Wei', '<b>Zheng, Da Wei</b>' }}
+<!--  {{ reference | replace_first: 'D. W. Zheng', '<b>Da Wei Zheng</b>' }}-->
 </div>
 
 <button class="button0"  onclick="toggleBibtex{{entry.key}}()">Bibtex</button>

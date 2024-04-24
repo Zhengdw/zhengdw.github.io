@@ -34,6 +34,7 @@ linkedin_username: zhengdw
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-redirect-from
 markdown: kramdown
 
 # other

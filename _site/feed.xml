@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-26T14:14:18-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Da Wei (David) Zheng</title><subtitle>PhD student studying theoretical computer science  at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.</subtitle><entry><title type="html">[SekaiCTF 2022] Diffecient</title><link href="http://localhost:4000/2022/10/03/sekaictf-diffecient.html" rel="alternate" type="text/html" title="[SekaiCTF 2022] Diffecient" /><published>2022-10-03T00:00:00-07:00</published><updated>2022-10-03T00:00:00-07:00</updated><id>http://localhost:4000/2022/10/03/sekaictf-diffecient</id><content type="html" xml:base="http://localhost:4000/2022/10/03/sekaictf-diffecient.html"><![CDATA[<h1 id="sekaictf-2022-diffecient">[SekaiCTF 2022] Diffecient</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2024-04-24T18:05:10-05:00</updated><id>/feed.xml</id><title type="html">Da Wei (David) Zheng</title><subtitle>PhD student studying theoretical computer science  at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.</subtitle><entry><title type="html">[SekaiCTF 2022] Diffecient</title><link href="/2022/10/03/sekaictf-diffecient.html" rel="alternate" type="text/html" title="[SekaiCTF 2022] Diffecient" /><published>2022-10-03T00:00:00-05:00</published><updated>2022-10-03T00:00:00-05:00</updated><id>/2022/10/03/sekaictf-diffecient</id><content type="html" xml:base="/2022/10/03/sekaictf-diffecient.html"><![CDATA[<h1 id="sekaictf-2022-diffecient">[SekaiCTF 2022] Diffecient</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
@@ -341,7 +341,7 @@ Enter key in hex
 b'SEKAI{56f066a1b13fd350ac4a4889efe22cb1825651843e9d0ccae0f87844d1d65190}'
 </code></pre></div></div>
 
-<p>Neato, I solved (and in fact got first blood) on a cryptography challenge without doing any of my own cryptanalysis, writing any real code, or even running any real code.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[[SekaiCTF 2022] Diffecient]]></summary></entry><entry><title type="html">[UTCTF 2022] Sunset</title><link href="http://localhost:4000/2022/03/13/utctf-sunset.html" rel="alternate" type="text/html" title="[UTCTF 2022] Sunset" /><published>2022-03-13T00:00:00-08:00</published><updated>2022-03-13T00:00:00-08:00</updated><id>http://localhost:4000/2022/03/13/utctf-sunset</id><content type="html" xml:base="http://localhost:4000/2022/03/13/utctf-sunset.html"><![CDATA[<h1 id="utctf-2021-sunset">[UTCTF 2021] Sunset</h1>
+<p>Neato, I solved (and in fact got first blood) on a cryptography challenge without doing any of my own cryptanalysis, writing any real code, or even running any real code.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[[SekaiCTF 2022] Diffecient]]></summary></entry><entry><title type="html">[UTCTF 2022] Sunset</title><link href="/2022/03/13/utctf-sunset.html" rel="alternate" type="text/html" title="[UTCTF 2022] Sunset" /><published>2022-03-13T00:00:00-06:00</published><updated>2022-03-13T00:00:00-06:00</updated><id>/2022/03/13/utctf-sunset</id><content type="html" xml:base="/2022/03/13/utctf-sunset.html"><![CDATA[<h1 id="utctf-2021-sunset">[UTCTF 2021] Sunset</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
@@ -364,7 +364,7 @@ but instead exploits the some of <strong>group properties</strong> of a cyclic a
 
 <h2 id="the-writeup">The writeup</h2>
 
-<p>See writeup I wrote at <a href="https://ubcctf.github.io/2022/03/utctf-sunset/">https://ubcctf.github.io/2022/03/utctf-sunset/</a>.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[[UTCTF 2021] Sunset]]></summary></entry><entry><title type="html">[K3RN3L CTF 2021] BogoAttack</title><link href="http://localhost:4000/2021/11/14/k3rn3lctf-bogo-attack.html" rel="alternate" type="text/html" title="[K3RN3L CTF 2021] BogoAttack" /><published>2021-11-14T00:00:00-08:00</published><updated>2021-11-14T00:00:00-08:00</updated><id>http://localhost:4000/2021/11/14/k3rn3lctf-bogo-attack</id><content type="html" xml:base="http://localhost:4000/2021/11/14/k3rn3lctf-bogo-attack.html"><![CDATA[<h1 id="k3rn3l-ctf-2021-bogoattack">[K3RN3L CTF 2021] BogoAttack</h1>
+<p>See writeup I wrote at <a href="https://ubcctf.github.io/2022/03/utctf-sunset/">https://ubcctf.github.io/2022/03/utctf-sunset/</a>.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[[UTCTF 2021] Sunset]]></summary></entry><entry><title type="html">[K3RN3L CTF 2021] BogoAttack</title><link href="/2021/11/14/k3rn3lctf-bogo-attack.html" rel="alternate" type="text/html" title="[K3RN3L CTF 2021] BogoAttack" /><published>2021-11-14T00:00:00-06:00</published><updated>2021-11-14T00:00:00-06:00</updated><id>/2021/11/14/k3rn3lctf-bogo-attack</id><content type="html" xml:base="/2021/11/14/k3rn3lctf-bogo-attack.html"><![CDATA[<h1 id="k3rn3l-ctf-2021-bogoattack">[K3RN3L CTF 2021] BogoAttack</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
@@ -573,7 +573,7 @@ elements at once!</p>
 <span class="n">sock</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">'2'</span><span class="p">)</span>
 <span class="n">sock</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">output</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">sock</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[K3RN3L CTF 2021] BogoAttack]]></summary></entry><entry><title type="html">[Hack.lu 2021] lwsr</title><link href="http://localhost:4000/2021/10/31/hacklu-lwsr.html" rel="alternate" type="text/html" title="[Hack.lu 2021] lwsr" /><published>2021-10-31T00:00:00-07:00</published><updated>2021-10-31T00:00:00-07:00</updated><id>http://localhost:4000/2021/10/31/hacklu-lwsr</id><content type="html" xml:base="http://localhost:4000/2021/10/31/hacklu-lwsr.html"><![CDATA[<h1 id="hacklu-ctf-2021">[Hack.lu CTF 2021]</h1>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[K3RN3L CTF 2021] BogoAttack]]></summary></entry><entry><title type="html">[Hack.lu 2021] lwsr</title><link href="/2021/10/31/hacklu-lwsr.html" rel="alternate" type="text/html" title="[Hack.lu 2021] lwsr" /><published>2021-10-31T00:00:00-05:00</published><updated>2021-10-31T00:00:00-05:00</updated><id>/2021/10/31/hacklu-lwsr</id><content type="html" xml:base="/2021/10/31/hacklu-lwsr.html"><![CDATA[<h1 id="hacklu-ctf-2021">[Hack.lu CTF 2021]</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
@@ -785,7 +785,7 @@ On the other hand my solution didn’t even look at a single vector!</p>
     <span class="n">state</span> <span class="o">=</span> <span class="n">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[Hack.lu CTF 2021]]]></summary></entry><entry><title type="html">[DUCTF 2021] yadlp</title><link href="http://localhost:4000/2021/09/27/ductf-yadlp.html" rel="alternate" type="text/html" title="[DUCTF 2021] yadlp" /><published>2021-09-27T00:00:00-07:00</published><updated>2021-09-27T00:00:00-07:00</updated><id>http://localhost:4000/2021/09/27/ductf-yadlp</id><content type="html" xml:base="http://localhost:4000/2021/09/27/ductf-yadlp.html"><![CDATA[<h1 id="ductf-2021-yadlp">[DUCTF 2021] yadlp</h1>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[Hack.lu CTF 2021]]]></summary></entry><entry><title type="html">[DUCTF 2021] yadlp</title><link href="/2021/09/27/ductf-yadlp.html" rel="alternate" type="text/html" title="[DUCTF 2021] yadlp" /><published>2021-09-27T00:00:00-05:00</published><updated>2021-09-27T00:00:00-05:00</updated><id>/2021/09/27/ductf-yadlp</id><content type="html" xml:base="/2021/09/27/ductf-yadlp.html"><![CDATA[<h1 id="ductf-2021-yadlp">[DUCTF 2021] yadlp</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
@@ -1077,7 +1077,7 @@ that conveniently solved this exact problem
 <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sol</span><span class="p">:</span>
     <span class="n">flag</span><span class="o">+=</span><span class="nb">int</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">key</span><span class="p">]).</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s">'big'</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[DUCTF 2021] yadlp]]></summary></entry><entry><title type="html">[CSAW CTF 2021] bits</title><link href="http://localhost:4000/2021/09/14/csawctf-bits.html" rel="alternate" type="text/html" title="[CSAW CTF 2021] bits" /><published>2021-09-14T00:00:00-07:00</published><updated>2021-09-14T00:00:00-07:00</updated><id>http://localhost:4000/2021/09/14/csawctf-bits</id><content type="html" xml:base="http://localhost:4000/2021/09/14/csawctf-bits.html"><![CDATA[<h1 id="csaw-ctf-2021-bits">[CSAW CTF 2021] bits</h1>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[DUCTF 2021] yadlp]]></summary></entry><entry><title type="html">[CSAW CTF 2021] bits</title><link href="/2021/09/14/csawctf-bits.html" rel="alternate" type="text/html" title="[CSAW CTF 2021] bits" /><published>2021-09-14T00:00:00-05:00</published><updated>2021-09-14T00:00:00-05:00</updated><id>/2021/09/14/csawctf-bits</id><content type="html" xml:base="/2021/09/14/csawctf-bits.html"><![CDATA[<h1 id="csaw-ctf-2021-bits">[CSAW CTF 2021] bits</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
@@ -1287,7 +1287,7 @@ and use that to compute the factorization of \(N\) into \(p\) and \(q\).</p>
 </code></pre></div></div>
 <p>And by calling <code class="language-plaintext highlighter-rouge">decrypt_flag(alice.pow_mod(&amp;d, &amp;N).unwrap());</code> we get our flag!</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FLAG = flag{https://www.youtube.com/watch?v=uhTCeZasCmc}
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[CSAW CTF 2021] bits]]></summary></entry><entry><title type="html">[CSAW CTF 2021] forgery</title><link href="http://localhost:4000/2021/09/14/csawctf-forgery.html" rel="alternate" type="text/html" title="[CSAW CTF 2021] forgery" /><published>2021-09-14T00:00:00-07:00</published><updated>2021-09-14T00:00:00-07:00</updated><id>http://localhost:4000/2021/09/14/csawctf-forgery</id><content type="html" xml:base="http://localhost:4000/2021/09/14/csawctf-forgery.html"><![CDATA[<h1 id="csaw-ctf-2021-forgery">[CSAW CTF 2021] forgery</h1>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[CSAW CTF 2021] bits]]></summary></entry><entry><title type="html">[CSAW CTF 2021] forgery</title><link href="/2021/09/14/csawctf-forgery.html" rel="alternate" type="text/html" title="[CSAW CTF 2021] forgery" /><published>2021-09-14T00:00:00-05:00</published><updated>2021-09-14T00:00:00-05:00</updated><id>/2021/09/14/csawctf-forgery</id><content type="html" xml:base="/2021/09/14/csawctf-forgery.html"><![CDATA[<h1 id="csaw-ctf-2021-forgery">[CSAW CTF 2021] forgery</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
@@ -1379,7 +1379,7 @@ they are).</p>
 <p>Flag:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flag{7h3_4rr0wv3r53_15_4w350M3!}
-</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[CSAW CTF 2021] forgery]]></summary></entry><entry><title type="html">[corCTF 2021] smogofwar</title><link href="http://localhost:4000/2021/08/25/corctf-smogofwar.html" rel="alternate" type="text/html" title="[corCTF 2021] smogofwar" /><published>2021-08-25T00:00:00-07:00</published><updated>2021-08-25T00:00:00-07:00</updated><id>http://localhost:4000/2021/08/25/corctf-smogofwar</id><content type="html" xml:base="http://localhost:4000/2021/08/25/corctf-smogofwar.html"><![CDATA[<h1 id="corctf-2021-smogofwar">[corCTF 2021] smogofwar</h1>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[[CSAW CTF 2021] forgery]]></summary></entry><entry><title type="html">[corCTF 2021] smogofwar</title><link href="/2021/08/25/corctf-smogofwar.html" rel="alternate" type="text/html" title="[corCTF 2021] smogofwar" /><published>2021-08-25T00:00:00-05:00</published><updated>2021-08-25T00:00:00-05:00</updated><id>/2021/08/25/corctf-smogofwar</id><content type="html" xml:base="/2021/08/25/corctf-smogofwar.html"><![CDATA[<h1 id="corctf-2021-smogofwar">[corCTF 2021] smogofwar</h1>
 
 <h2 id="tldr">tl;dr</h2>
 
