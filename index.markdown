@@ -16,8 +16,10 @@ My interests lie in theoretical computer science, predominantly in algorithms an
 
 You can see a list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
 
+I plan on graduating in May of 2025 and I'm currently looking for academic positions and postdocs.
+
 ### Other Activities
 I was involved in competitive programming at UBC. I went to ICPC World Finals 2018 in Beijing and 2019 in Porto, and was the coach of the 2020 and 2021 UBC team (both of which went to world finals in Russia and Dhaka).
 I am now coaching the UIUC team as of 2022.
 
-I started playing in some Capture the Flag (CTF) events for fun in 2021. You can see some of my writeups [here](/blog.html).
+I started playing in some Capture the Flag (CTF) events for fun for a bit in 2021-2022. You can see some of my writeups [here](/blog.html).

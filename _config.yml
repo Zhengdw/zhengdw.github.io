@@ -52,8 +52,10 @@ sass:
 # jekyll scholar settings
 scholar:
   #style: assets/bibliography/ieee-with-url.csl
-  style: assets/bibliography/ieee.csl
-  #style: assets/bibliography/acm.csl
+  #style: assets/bibliography/ieee.csl
+  style: assets/bibliography/author-only.csl
+  #style: assets/bibliography/springer-lecture-notes-in-computer-science.csl
+  #style: assets/bibliography/poizat.csl
   #style: apa
   locale: en
 
