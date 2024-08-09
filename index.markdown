@@ -23,3 +23,13 @@ I was involved in competitive programming at UBC. I went to ICPC World Finals 20
 I am now coaching the UIUC team as of 2022.
 
 I started playing in some Capture the Flag (CTF) events for fun for a bit in 2021-2022. You can see some of my writeups [here](/blog.html).
+
+
+## News
+
+---
+
+Inspired by [others](https://hunglvosu.github.io/), I've started updating my website with news.
+
+*[July 2024]* Started news section.
+
