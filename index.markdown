@@ -8,26 +8,66 @@ layout: home
 # About 
 
 Hi, I'm David. 
-I'm a PhD student in Computer Science at the University of Illinois at Urbana-Champaign (UIUC).
+I'm a PhD student in Computer Science at the University of Illinois at Urbana-Champaign (UIUC). I am fortunate enough to be advised by [Timothy Chan](https://tmc.web.engr.illinois.edu/).
 I completed a BSc in Combined Honours Computer Science and Mathematics and a
-MSc in Computer Science at the University of British Columbia (UBC). 
+MSc in Computer Science at the University of British Columbia (UBC) with [Will Evans](https://www.cs.ubc.ca/~will/). 
 
-My interests lie in theoretical computer science, predominantly in algorithms and data structures. I enjoy thinking about any interesting problem, especially if they involve either graphs or geometry.
+---   
+## Research 
 
-You can see a list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
+My interests lie in theoretical computer science, predominantly in algorithms and data structures.
+I enjoy thinking about problems involving graphs or geometry.  
+I started with some success with geometric optimization challenges 
+ ([CG:SHOP 2020](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2020.83),
+  [CG:SHOP 2021](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2021.64),
+  [CG:SHOP 2022](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2022.72)).
+Since then, I've worked on fundamental geometric data structure problems
+ ([Hopcroft's problem](https://doi.org/10.1137/1.9781611977073.10),
+  [simplex](https://doi.org/10.1137/1.9781611977554.ch54) and 
+  [semi-algebraic range searching](http://doi.org/10.48550/ARXIV.2403.12303),
+  [Voronoi diagrams](https://doi.org/10.1137/1.9781611977912.156),
+  [cuttings](https://doi.org/10.1137/1.9781611977554.ch49)), 
+combinatorial optimization 
+ ([matchings](https://doi.org/10.1007/978-3-031-32726-1_32),
+  [submodular optimization over matroids](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)
+),
+and lately I've been working with both in geometric graphs 
+ ([UDGs](https://arxiv.org/abs/2407.15980),
+  [matchings](/publications.html))
+and planar graphs 
+ ([MPC](https://doi.org/10.1137/1.9781611977912.155),
+  [steiner trees](https://doi.org/10.48550/arXiv.2407.01904),
+  [diameter and distance oracles](/publications.html)).
+
+You can see a complete list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
 
 I plan on graduating in May of 2025 and I'm currently looking for academic positions and postdocs.
 
+### Service
+
+I've reviewed papers for conferences like
+SODA 2025,
+ALENEX 2025,
+ICALP 2024,
+STACS 2024,
+SoCG 2024,
+APPROX 2023,
+ESA 2023,
+ICALP 2023,
+SODA 2023,
+ESA 2022, and
+SoCG 2022, and journals like CGTA and ORL.
+
+---
 ### Other Activities
+
 I was involved in competitive programming at UBC. I went to ICPC World Finals 2018 in Beijing and 2019 in Porto, and was the coach of the 2020 and 2021 UBC team (both of which went to world finals in Russia and Dhaka).
 I am now coaching the UIUC team as of 2022.
 
 I started playing in some Capture the Flag (CTF) events for fun for a bit in 2021-2022. You can see some of my writeups [here](/blog.html).
 
-
-## News
-
 ---
+## News
 
 Inspired by [others](https://hunglvosu.github.io/), I've started updating my website with news.
 
