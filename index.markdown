@@ -12,6 +12,8 @@ I'm a PhD student in Computer Science at the University of Illinois at Urbana-Ch
 I completed a BSc in Combined Honours Computer Science and Mathematics and a
 MSc in Computer Science at the University of British Columbia (UBC) with [Will Evans](https://www.cs.ubc.ca/~will/). 
 
+You can see a complete list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
+
 *I plan on graduating in May 2025 and I'm currently looking for academic positions and postdocs.*
 
 ---   
@@ -43,10 +45,7 @@ and planar graphs
   [steiner trees](https://doi.org/10.48550/arXiv.2407.01904),
   [diameter and distance oracles](/publications.html)).
 
-You can see a complete list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
-
-### Service
-
+**Service.**
 I've reviewed papers for conferences like
 SODA 2025,
 ALENEX 2025,
@@ -61,7 +60,7 @@ ESA 2022, and
 SoCG 2022, and journals like CGTA and ORL.
 
 ---
-### Other Activities
+## Other Activities
 
 I was involved in competitive programming at UBC. I went to ICPC World Finals 2018 in Beijing and 2019 in Porto, and was the coach of the 2020 and 2021 UBC team (both of which went to world finals in Russia and Dhaka).
 I am now coaching the UIUC team as of 2022.
