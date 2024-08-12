@@ -33,11 +33,11 @@ Since then, I've worked on fundamental geometric data structure problems
   [semi-algebraic range searching](https://doi.org/10.4230/LIPIcs.SoCG.2024.33),
   [Voronoi diagrams](https://doi.org/10.1137/1.9781611977912.156),
   [cuttings](https://doi.org/10.1137/1.9781611977554.ch49)), 
-combinatorial optimization 
+and combinatorial optimization 
  ([matchings](https://doi.org/10.1007/978-3-031-32726-1_32),
-  [submodular optimization](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)
-),
-and lately I've been working with both in geometric graphs 
+  [submodular optimization](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)).
+Lately I've been thinking about problems in 
+geometric graphs 
  ([UDGs](https://arxiv.org/abs/2407.15980),
   [matchings](/publications.html))
 and planar graphs 
