@@ -70,7 +70,7 @@ I started playing in some Capture the Flag (CTF) events for fun for a bit in 202
 ---
 ## News
 
-Inspired by [others](https://hunglvosu.github.io/), I've started updating my website with news.
+Inspired by others, I've started updating my website with news.
 
 **[July 2024]** Started news section.
 
