@@ -12,11 +12,15 @@ I'm a PhD student in Computer Science at the University of Illinois at Urbana-Ch
 I completed a BSc in Combined Honours Computer Science and Mathematics and a
 MSc in Computer Science at the University of British Columbia (UBC) with [Will Evans](https://www.cs.ubc.ca/~will/). 
 
+*I plan on graduating in May 2025 and I'm currently looking for academic positions and postdocs.*
+
 ---   
+
 ## Research 
 
 My interests lie in theoretical computer science, predominantly in algorithms and data structures.
 I enjoy thinking about problems involving graphs or geometry.  
+
 I started with some success with geometric optimization challenges 
  ([CG:SHOP 2020](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2020.83),
   [CG:SHOP 2021](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2021.64),
@@ -24,12 +28,12 @@ I started with some success with geometric optimization challenges
 Since then, I've worked on fundamental geometric data structure problems
  ([Hopcroft's problem](https://doi.org/10.1137/1.9781611977073.10),
   [simplex](https://doi.org/10.1137/1.9781611977554.ch54) and 
-  [semi-algebraic range searching](http://doi.org/10.48550/ARXIV.2403.12303),
+  [semi-algebraic range searching](https://doi.org/10.4230/LIPIcs.SoCG.2024.33),
   [Voronoi diagrams](https://doi.org/10.1137/1.9781611977912.156),
   [cuttings](https://doi.org/10.1137/1.9781611977554.ch49)), 
 combinatorial optimization 
  ([matchings](https://doi.org/10.1007/978-3-031-32726-1_32),
-  [submodular optimization over matroids](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)
+  [submodular optimization](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)
 ),
 and lately I've been working with both in geometric graphs 
  ([UDGs](https://arxiv.org/abs/2407.15980),
@@ -40,8 +44,6 @@ and planar graphs
   [diameter and distance oracles](/publications.html)).
 
 You can see a complete list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
-
-I plan on graduating in May of 2025 and I'm currently looking for academic positions and postdocs.
 
 ### Service
 
@@ -71,5 +73,5 @@ I started playing in some Capture the Flag (CTF) events for fun for a bit in 202
 
 Inspired by [others](https://hunglvosu.github.io/), I've started updating my website with news.
 
-*[July 2024]* Started news section.
+**[July 2024]** Started news section.
 
