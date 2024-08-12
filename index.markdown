@@ -23,24 +23,24 @@ You can see a complete list of my papers [here](/publications.html). Here is my 
 My interests lie in theoretical computer science, predominantly in algorithms and data structures.
 I enjoy thinking about problems involving graphs or geometry.  
 
-I started with some success with geometric optimization challenges 
+I started with some success with *geometric optimization challenges*
  ([CG:SHOP 2020](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2020.83),
   [CG:SHOP 2021](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2021.64),
   [CG:SHOP 2022](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2022.72)).
-Since then, I've worked on fundamental geometric data structure problems
+Since then, I've worked on *geometric data structures*, 
  ([Hopcroft's problem](https://doi.org/10.1137/1.9781611977073.10),
   [simplex](https://doi.org/10.1137/1.9781611977554.ch54) and 
   [semi-algebraic range searching](https://doi.org/10.4230/LIPIcs.SoCG.2024.33),
   [Voronoi diagrams](https://doi.org/10.1137/1.9781611977912.156),
   [cuttings](https://doi.org/10.1137/1.9781611977554.ch49)), 
-and combinatorial optimization 
+and *combinatorial optimization*
  ([matchings](https://doi.org/10.1007/978-3-031-32726-1_32),
   [submodular optimization](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)).
 Lately I've been thinking about problems in 
-geometric graphs 
+*geometric graphs*
  ([UDGs](https://arxiv.org/abs/2407.15980),
   [matchings](/publications.html))
-and planar graphs 
+and *planar graphs*
  ([MPC](https://doi.org/10.1137/1.9781611977912.155),
   [steiner trees](https://doi.org/10.48550/arXiv.2407.01904),
   [diameter and distance oracles](/publications.html)).
