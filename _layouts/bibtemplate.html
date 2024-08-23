@@ -1,7 +1,8 @@
 ---
 ---
+<font size="-1">
 <b>
-<font size="+1">  {{ entry.title }}  </font>
+  {{ entry.title }}  
 </b>
 {% if entry.conference %}
 <br>
@@ -47,6 +48,7 @@
 <pre>{{entry.bibtex}}</pre>
 </div>
 
+
 <script>
 function toggleBibtex{{entry.key}}(parameter) {
     var x= document.getElementById('a{{entry.key}}');
@@ -68,3 +70,4 @@ function toggleAbstract{{entry.abstract}}(parameter) {
     }
 }
 </script>
+</font>

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "CV"
-redirect_to: /assets/cv.pdf
+redirect_to: https://zhengdw.github.io/assets/cv.pdf
 ---
 
 <li class="inline-block">

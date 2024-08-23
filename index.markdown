@@ -12,7 +12,7 @@ I'm a PhD student in Computer Science at the University of Illinois at Urbana-Ch
 I completed a BSc in Combined Honours Computer Science and Mathematics and a
 MSc in Computer Science at the University of British Columbia (UBC) with [Will Evans](https://www.cs.ubc.ca/~will/). 
 
-You can see a complete list of my papers [here](/publications.html). Here is my [CV](/assets/DaWeiZheng_resume.pdf).
+You can see a complete list of my papers [here](/publications.html). Here is my [CV](https://zhengdw.github.io/assets/cv.pdf).
 
 *I plan on graduating in May 2025 and I'm currently looking for academic positions and postdocs.*
 
