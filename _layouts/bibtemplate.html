@@ -4,19 +4,19 @@
 <b>
   {{ entry.title }}  
 </b>
-{% if entry.conference %}
+
 <br>
+
+{% if entry.conference %}
 <em>
 ({{ entry.conference }}) 
 </em>
 {% endif %}
-
 <!-- {{ entry.author  | replace_first: 'Zheng, Da Wei', '<b>Zheng, Da Wei</b>' }}-->
-
-<div class="text-justify">
 <!-- {{ entry.author  | replace_first: 'Zheng, Da Wei', '<b>Zheng, Da Wei</b>' }} -->
- {{ reference | replace_first: 'Da Wei Zheng', '<b>Da Wei Zheng</b>' }}
-</div>
+{{ reference | replace_first: 'Da Wei Zheng', '<em>Da Wei Zheng</em>' }}
+
+<br> 
 
 <button class="button0"  onclick="toggleBibtex{{entry.key}}()">Bibtex</button>
 
@@ -70,4 +70,5 @@ function toggleAbstract{{entry.abstract}}(parameter) {
     }
 }
 </script>
+
 </font>

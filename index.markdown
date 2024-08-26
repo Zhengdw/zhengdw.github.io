@@ -14,7 +14,7 @@ MSc in Computer Science at the University of British Columbia (UBC) with [Will E
 
 You can see a complete list of my papers [here](/publications.html). Here is my [CV](/cv.html).
 
-*I plan on graduating in May 2025 and I'm currently looking for academic positions and postdocs.*
+*I plan on graduating May 2025 and I'm currently looking for academic positions and postdocs.*
 
 ---   
 
@@ -23,17 +23,17 @@ You can see a complete list of my papers [here](/publications.html). Here is my 
 My interests lie in theoretical computer science, predominantly in algorithms and data structures.
 I enjoy thinking about problems involving graphs or geometry.  
 
-I started with some success with *geometric optimization challenges*
+I enjoyed some early success with *geometric optimization challenges*
  ([CG:SHOP 2020](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2020.83),
   [CG:SHOP 2021](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2021.64),
   [CG:SHOP 2022](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2022.72)).
 Since then, I've worked on *geometric data structures*, 
  ([Hopcroft's problem](https://doi.org/10.1137/1.9781611977073.10),
-  [simplex](https://doi.org/10.1137/1.9781611977554.ch54) and 
+  [cuttings](https://doi.org/10.1137/1.9781611977554.ch49),
+  [simplex](https://doi.org/10.1137/1.9781611977554.ch54) 
   [semi-algebraic range searching](https://doi.org/10.4230/LIPIcs.SoCG.2024.33),
-  [Voronoi diagrams](https://doi.org/10.1137/1.9781611977912.156),
-  [cuttings](https://doi.org/10.1137/1.9781611977554.ch49)), 
-and *combinatorial optimization*
+  [Voronoi diagrams](https://doi.org/10.1137/1.9781611977912.156)), 
+and *data structures for combinatorial optimization*
  ([matchings](https://doi.org/10.1007/978-3-031-32726-1_32),
   [submodular optimization](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)).
 Lately I've been thinking about problems in 
@@ -48,7 +48,9 @@ and *planar graphs*
 **Service.**
 I've reviewed papers for conferences like
 SODA 2025,
+SOSA 2025,
 ALENEX 2025,
+ESA 2024,
 ICALP 2024,
 STACS 2024,
 SoCG 2024,
