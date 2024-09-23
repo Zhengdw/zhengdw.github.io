@@ -75,5 +75,6 @@ I started playing in some Capture the Flag (CTF) events for fun for a bit in 202
 Inspired by others, I've started updating my website with news.
 
 **[Aug 2024]** Coached UIUC team at [ICPC WF 2024](https://worldfinals.icpc.global/) in Kazakhstan.
+
 **[Jul 2024]** Started news section.
 
