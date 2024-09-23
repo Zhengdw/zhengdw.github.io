@@ -64,8 +64,8 @@ SoCG 2022, and journals like CGTA and ORL.
 ---
 ## Other Activities
 
-I was involved in competitive programming at UBC. I went to ICPC World Finals 2018 in Beijing and 2019 in Porto, and was the coach of the 2020 and 2021 UBC team (both of which went to world finals in Russia and Dhaka).
-I am now coaching the UIUC team as of 2022.
+I was involved in competitive programming at UBC. I went to ICPC World Finals 2018 in Beijing and 2019 in Porto, and was the coach of the 2020 and 2021 UBC team (both of which went to world finals).
+I am now coaching the UIUC team as of 2022, UIUC teams qualified for ICPC WF for 2022 and 2024.
 
 I started playing in some Capture the Flag (CTF) events for fun for a bit in 2021-2022. You can see some of my writeups [here](/blog.html).
 
@@ -74,5 +74,6 @@ I started playing in some Capture the Flag (CTF) events for fun for a bit in 202
 
 Inspired by others, I've started updating my website with news.
 
-**[July 2024]** Started news section.
+**[Aug 2024]** Coached UIUC team at [ICPC WF 2024](https://worldfinals.icpc.global/) in Kazakhstan.
+**[Jul 2024]** Started news section.
 
