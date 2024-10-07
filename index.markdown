@@ -74,7 +74,7 @@ I started playing in some Capture the Flag (CTF) events for fun for a bit in 202
 
 Inspired by others, I've started updating my website with news.
 
-**[Oct 2024]** My paper with Adam Karszmarz got accepted to **SODA25**! The paper is about subquadratic algorithms in minor-free graphs.
+**[Oct 2024]** My paper with Adam Karczmarz got accepted to **SODA25**! The paper is about subquadratic algorithms in minor-free graphs.
 
 **[Aug 2024]** Coached UIUC team at [ICPC WF 2024](https://worldfinals.icpc.global/) in Kazakhstan.
 
