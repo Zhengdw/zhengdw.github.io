@@ -5,6 +5,11 @@ title: "Publications"
 
 # Publications
 
+## 2025
+
+{% bibliography --query @*[year=2025] %}
+
+
 ## 2024
 
 {% bibliography --query @*[year=2024] %}
