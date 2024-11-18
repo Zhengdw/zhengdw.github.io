@@ -12,7 +12,7 @@ I'm a PhD student in Computer Science at the University of Illinois at Urbana-Ch
 I completed a BSc in Combined Honours Computer Science and Mathematics and a
 MSc in Computer Science at the University of British Columbia (UBC) with [Will Evans](https://www.cs.ubc.ca/~will/). 
 
-You can see a complete list of my papers [here](/publications.html). Here is my [CV](/cv.html).
+You can see [a complete list of my papers here](/publications.html) and my [CV here](/cv.html).
 
 *I plan on graduating May 2025 and I'm currently looking for academic positions and postdocs.*
 
@@ -39,11 +39,12 @@ and *data structures for combinatorial optimization*
 Lately I've been thinking about problems in 
 *geometric graphs*
  ([UDGs](https://arxiv.org/abs/2407.15980),
-  [matchings](/publications.html))
-and *planar graphs*
+  [matchings](/publications.html)),
+*planar graphs*
  ([MPC](https://doi.org/10.1137/1.9781611977912.155),
-  [steiner trees](https://doi.org/10.48550/arXiv.2407.01904),
-  [diameter and distance oracles](/publications.html)).
+  [steiner trees](https://doi.org/10.48550/arXiv.2407.01904)),
+and *minor-free graphs*
+ ([diameter and distance oracles](https://arxiv.org/abs/2410.12003)).
 
 **Service.**
 I've been a subreviewer for the conferences: 
@@ -61,7 +62,7 @@ SODA 2023,
 ESA 2022, and
 SoCG 2022. 
 
-I've also reviewed for the journals CGTA, JEA and Operation Research Letters.
+I've also reviewed for the journals CGTA, JEA, and Operation Research Letters.
 
 ---
 ## Other Activities
