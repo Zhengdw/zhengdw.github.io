@@ -79,13 +79,15 @@ Inspired by others, I've started updating my website with news.
 
 **[Aug 2025]** I recieved the [CCCG 2025](https://sites.google.com/view/cccgwads-2025/home) PhD Dissertation Award!
 
-**[July 2025]** "Truly Subquadratic Time Algorithms for Diameter and Related Problems in Graphs of Bounded VC-dimension" coauthored with Timothy M. Chan, Hsien-Chih Chang, Jie Gao, Sándor Kisfaludi-Bak, and Hung Le gave the first subquadratic algorithm for diameter in unit-disk graphs was accepted to FOCS 2025.
+**[July 2025]** "Truly Subquadratic Time Algorithms for Diameter and Related Problems in Graphs of Bounded VC-dimension" coauthored with [Timothy M. Chan](https://tmc.web.engr.illinois.edu/), [Hsien-Chih Chang](https://hcsoso.github.io/), [Jie Gao](https://sites.rutgers.edu/jie-gao/about/), [Sándor Kisfaludi-Bak](https://skisfaludibak.com/), and [Hung Le](https://hunglvosu.github.io/) gave the first subquadratic algorithm for diameter in unit-disk graphs was accepted to FOCS 2025.
+
+**[May 2025]** I graduated! Thanks [David Eppstein](https://ics.uci.edu/~eppstein/) for serving as my external examiner and mentioning me in [his blog](https://11011110.github.io/blog/2025/04/10/congratulations-dr-zheng.html).
 
 **[May 2025]** UIUC ICPC team Ippatsu got [first place at the North American Championships](https://siebelschool.illinois.edu/news/ICPC-2025)! Congrats to Dilhan Salgado, Yuuki Sawanoi, and Zhikun Wang.
 
 **[Mar 2025]** I recieved an [Outstanding Reviewer Award](/assets/SoCG_2025_Award_outstanding-reviewer-Zheng.pdf) for [SoCG 2025](https://socg25.github.io/socg.html).
 
-**[Jan 2025]** ["Fully Dynamic Euclidean Bi-Chromatic Matching in Sublinear Update Time"](https://icml.cc/virtual/2025/poster/43715) coauthored with Gramoz Goranci, Peter Kiss, Neel Patel, Martin Seybold, and Eva Szilagyi recieved an oral presentation slot (given to ~1% of accepted papers) at [ICML 2025](https://icml.cc/Conferences/2025) where it was presented by Eva.
+**[Jan 2025]** ["Fully Dynamic Euclidean Bi-Chromatic Matching in Sublinear Update Time"](https://icml.cc/virtual/2025/poster/43715) coauthored with [Gramoz Goranci](https://sites.google.com/view/ggoranci/), [Peter Kiss](https://sites.google.com/view/peterkiss/home), [Neel Patel](https://patelneel88.github.io/neelpatel/), Martin Seybold, and Eva Szilagyi recieved an oral presentation slot (given to ~1% of accepted papers) at [ICML 2025](https://icml.cc/Conferences/2025) where it was presented by Eva.
 
 **[Oct 2024]** ["Subquadratic algorithms in minor-free digraphs: (weighted) distance oracles, decremental reachability, and more"](https://arxiv.org/abs/2410.12003) coauthored with Adam Karczmarz got accepted to [SODA25](https://www.siam.org/conferences-events/past-event-archive/soda25/)! The paper is about subquadratic algorithms in minor-free graphs.
 
