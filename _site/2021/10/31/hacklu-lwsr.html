@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>[Hack.lu 2021] lwsr | Da Wei (David) Zheng</title>
-<meta name="generator" content="Jekyll v4.2.2" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="[Hack.lu 2021] lwsr" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="[Hack.lu CTF 2021]" />
@@ -13,11 +13,11 @@
 <meta property="og:url" content="http://localhost:4000/2021/10/31/hacklu-lwsr.html" />
 <meta property="og:site_name" content="Da Wei (David) Zheng" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-10-31T00:00:00-05:00" />
+<meta property="article:published_time" content="2021-10-31T00:00:00+02:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="[Hack.lu 2021] lwsr" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-31T00:00:00-05:00","datePublished":"2021-10-31T00:00:00-05:00","description":"[Hack.lu CTF 2021]","headline":"[Hack.lu 2021] lwsr","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/10/31/hacklu-lwsr.html"},"url":"http://localhost:4000/2021/10/31/hacklu-lwsr.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2021-10-31T00:00:00+02:00","datePublished":"2021-10-31T00:00:00+02:00","description":"[Hack.lu CTF 2021]","headline":"[Hack.lu 2021] lwsr","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2021/10/31/hacklu-lwsr.html"},"url":"http://localhost:4000/2021/10/31/hacklu-lwsr.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Da Wei (David) Zheng" /><script type="text/javascript" async
    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -45,7 +45,7 @@
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">[Hack.lu 2021] lwsr</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-10-31T00:00:00-05:00" itemprop="datePublished">Oct 31, 2021
+      <time class="dt-published" datetime="2021-10-31T00:00:00+02:00" itemprop="datePublished">Oct 31, 2021
       </time></p>
   </header>
 
@@ -77,8 +77,8 @@ it updates it with <code class="language-plaintext highlighter-rouge">state = lf
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="c1"># x^384 + x^8 + x^7 + x^6 + x^4 + x^3 + x^2 + x + 1
 </span>    <span class="n">mask</span>   <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">384</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">377</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">newbit</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="n">count</span><span class="p">(</span><span class="s">'1'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span> <span class="o">&lt;&lt;</span> <span class="mi">383</span><span class="p">)</span>
+    <span class="n">newbit</span> <span class="o">=</span> <span class="nf">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="nf">count</span><span class="p">(</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
+    <span class="nf">return </span><span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span> <span class="o">&lt;&lt;</span> <span class="mi">383</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Essentially, it generates a bit stream by xoring some bits in the stream to generate the next bit (in this case the last 7 bits and the 384th bit).</p>
@@ -104,24 +104,24 @@ LWEs is a hard problem that can be the basis of a cryptosystem.</p>
 
 <p>Looking at the code that does the encryption:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">byte</span> <span class="ow">in</span> <span class="n">flag</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">byte</span><span class="p">,</span> <span class="s">'#010b'</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]):</span>
+    <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">format</span><span class="p">(</span><span class="n">byte</span><span class="p">,</span> <span class="sh">'</span><span class="s">#010b</span><span class="sh">'</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]):</span>
         <span class="c1"># encode message
 </span>        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">bit</span>
         <span class="k">assert</span> <span class="n">msg</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">msg</span> <span class="o">==</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="c1"># encrypt
-</span>        <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]),</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vector</span><span class="p">(</span><span class="n">pk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</span>        <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="nf">vector</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]),</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="nf">if </span><span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="nf">vector</span><span class="p">(</span><span class="n">pk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
                 <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">pk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="c1"># fix ciphertext
 </span>        <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">msg</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
         <span class="c1"># advance LFSR
-</span>        <span class="n">state</span> <span class="o">=</span> <span class="n">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span>        <span class="n">state</span> <span class="o">=</span> <span class="nf">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The code encrypts each bit of the string by computing \(v = \sum_{i\in L} v_i\) where \(L\) are the on bits in the LFSR and computing the corresponding approximate \(c = \sum_{c_i\in L} c_i\), and adding <code class="language-plaintext highlighter-rouge">q &gt;&gt; 1</code> in \(\mathbb{F}_q\) if the bit is on. 
@@ -131,8 +131,8 @@ Note that \(c\) is approximate, but the sum of a gaussian distribution is still 
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
     <span class="c1"># now it's your turn :)
-</span>    <span class="k">print</span><span class="p">(</span><span class="s">"Your message bit: "</span><span class="p">)</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span><span class="p">())</span>
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Your message bit: </span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="nf">readline</span><span class="p">())</span>
     <span class="k">if</span> <span class="n">msg</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="k">break</span>
     <span class="k">assert</span> <span class="n">msg</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">msg</span> <span class="o">==</span> <span class="mi">1</span>
@@ -141,27 +141,27 @@ Note that \(c\) is approximate, but the sum of a gaussian distribution is still 
 </span>    <span class="n">pk</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">msg</span>
 
     <span class="c1"># encrypt
-</span>    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="n">vector</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]),</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vector</span><span class="p">(</span><span class="n">pk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</span>    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="nf">vector</span><span class="p">([</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]),</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="nf">if </span><span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="nf">vector</span><span class="p">(</span><span class="n">pk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">pk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="c1"># fix public key
 </span>    <span class="n">pk</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">msg</span>
 
     <span class="c1"># check correctness by decrypting
-</span>    <span class="n">decrypt</span> <span class="o">=</span> <span class="n">ZZ</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">dot_product</span><span class="p">(</span><span class="n">sk</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span>    <span class="n">decrypt</span> <span class="o">=</span> <span class="nc">ZZ</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">dot_product</span><span class="p">(</span><span class="n">sk</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">decrypt</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">decrypt</span> <span class="o">-=</span> <span class="n">q</span>
-    <span class="n">decode</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">decrypt</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="n">decode</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="nf">abs</span><span class="p">(</span><span class="n">decrypt</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="n">decode</span> <span class="o">==</span> <span class="n">msg</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Success!"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Success!</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Oh no :("</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Oh no :(</span><span class="sh">"</span><span class="p">)</span>
 
     <span class="c1"># advance LFSR
-</span>    <span class="n">state</span> <span class="o">=</span> <span class="n">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span>    <span class="n">state</span> <span class="o">=</span> <span class="nf">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This seems fine, and in fact some local testing shows that decryption should work with very high probability, as the error for the sum of bits should be rather small.
@@ -174,8 +174,8 @@ of the ciphertext being modified when the bit is on, the value of the first vect
 Fortunately by looking at the equation of the last bit, we can easily recover the first bit we lost in the shift, so the LFSR is performing an invertible operation.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">revlfsr</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="n">mask</span>   <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">384</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">376</span><span class="p">)</span> 
-    <span class="n">newbit</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="n">count</span><span class="p">(</span><span class="s">'1'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="p">((</span><span class="n">state</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">384</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">newbit</span> <span class="o">=</span> <span class="nf">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="nf">count</span><span class="p">(</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
+    <span class="nf">return </span><span class="p">((</span><span class="n">state</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">384</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And now we’re done! We know the full state of the LFSR, so if we try encrypting using the same scheme, if the value we compute by summing the corresponding values \(c_i\) in the public key is exactly equal, than we know that bit is 0, otherwise, we should be off by exactly <code class="language-plaintext highlighter-rouge">q &gt;&gt; 1</code>(\(8205\)), so we are done without having to deal with any vector operations at all!</p>
@@ -188,80 +188,80 @@ Fortunately by looking at the equation of the last bit, we can easily recover th
 On the other hand my solution didn’t even look at a single vector!</p>
 
 <p>Full solve script:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sage.all</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">sage.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="n">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="k">def</span> <span class="nf">read_until</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="sa">b</span><span class="s">'='</span><span class="p">):</span>
-    <span class="n">delim</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">delim</span><span class="p">,</span> <span class="s">"ascii"</span><span class="p">)</span>
-    <span class="n">buf</span> <span class="o">=</span> <span class="sa">b</span><span class="s">''</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">buf</span><span class="p">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">delim</span><span class="p">):</span>
-        <span class="n">buf</span> <span class="o">+=</span> <span class="n">s</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"[+] READING: "</span><span class="p">,</span> <span class="n">buf</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">read_until</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delim</span><span class="o">=</span><span class="sa">b</span><span class="sh">'</span><span class="s">=</span><span class="sh">'</span><span class="p">):</span>
+    <span class="n">delim</span> <span class="o">=</span> <span class="nf">bytes</span><span class="p">(</span><span class="n">delim</span><span class="p">,</span> <span class="sh">"</span><span class="s">ascii</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="sa">b</span><span class="sh">''</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">buf</span><span class="p">.</span><span class="nf">endswith</span><span class="p">(</span><span class="n">delim</span><span class="p">):</span>
+        <span class="n">buf</span> <span class="o">+=</span> <span class="n">s</span><span class="p">.</span><span class="nf">recv</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">[+] READING: </span><span class="sh">"</span><span class="p">,</span> <span class="n">buf</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">buf</span>
 
-<span class="n">sock</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s">"flu.xxx"</span><span class="p">,</span> <span class="mi">20075</span><span class="p">)</span>
+<span class="n">sock</span> <span class="o">=</span> <span class="nf">connect</span><span class="p">(</span><span class="sh">"</span><span class="s">flu.xxx</span><span class="sh">"</span><span class="p">,</span> <span class="mi">20075</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="c1"># x^384 + x^8 + x^7 + x^6 + x^4 + x^3 + x^2 + x + 1
 </span>    <span class="n">mask</span>   <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">384</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">377</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">newbit</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="n">count</span><span class="p">(</span><span class="s">'1'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span> <span class="o">&lt;&lt;</span> <span class="mi">383</span><span class="p">)</span>
+    <span class="n">newbit</span> <span class="o">=</span> <span class="nf">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="nf">count</span><span class="p">(</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
+    <span class="nf">return </span><span class="p">(</span><span class="n">state</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span> <span class="o">&lt;&lt;</span> <span class="mi">383</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">revlfsr</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="n">mask</span>   <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">384</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">376</span><span class="p">)</span> 
-    <span class="n">newbit</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="n">count</span><span class="p">(</span><span class="s">'1'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="p">((</span><span class="n">state</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">384</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">newbit</span> <span class="o">=</span> <span class="nf">bin</span><span class="p">(</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">).</span><span class="nf">count</span><span class="p">(</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span>
+    <span class="nf">return </span><span class="p">((</span><span class="n">state</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">newbit</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">384</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="n">m</span> <span class="o">=</span> <span class="mi">384</span>
 <span class="n">q</span> <span class="o">=</span> <span class="mi">16411</span>
 
-<span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span> <span class="c1"># first line saying something about q
-</span><span class="k">exec</span><span class="p">(</span><span class="sa">b</span><span class="s">'pk = '</span> <span class="o">+</span> <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">).</span><span class="n">strip</span><span class="p">())</span>
+<span class="nf">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span> <span class="c1"># first line saying something about q
+</span><span class="nf">exec</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">pk = </span><span class="sh">'</span> <span class="o">+</span> <span class="nf">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">).</span><span class="nf">strip</span><span class="p">())</span>
 
-<span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span> <span class="c1"># some nonsense that doesn't matter
+<span class="nf">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span> <span class="c1"># some nonsense that doesn't matter
 </span>
 <span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">read_colon</span> <span class="o">=</span> <span class="bp">False</span>
-<span class="n">inp</span> <span class="o">=</span> <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">':'</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-    <span class="k">if</span> <span class="sa">b</span><span class="s">':'</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+<span class="n">inp</span> <span class="o">=</span> <span class="nf">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">inp</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="k">if</span> <span class="sa">b</span><span class="sh">'</span><span class="s">:</span><span class="sh">'</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
         <span class="k">break</span>
-    <span class="k">exec</span><span class="p">(</span><span class="sa">b</span><span class="s">'c.append('</span><span class="o">+</span><span class="n">l</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span><span class="o">+</span><span class="sa">b</span><span class="s">')'</span><span class="p">)</span>
+    <span class="nf">exec</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">c.append(</span><span class="sh">'</span><span class="o">+</span><span class="n">l</span><span class="p">.</span><span class="nf">strip</span><span class="p">()</span><span class="o">+</span><span class="sa">b</span><span class="sh">'</span><span class="s">)</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">384</span><span class="p">):</span>
-    <span class="n">sock</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s">'1'</span><span class="p">)</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">':'</span><span class="p">)</span> <span class="c1"># end of : line
-</span>    <span class="k">if</span> <span class="sa">b</span><span class="s">'Oh no'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">384</span><span class="p">):</span>
+    <span class="n">sock</span><span class="p">.</span><span class="nf">sendline</span><span class="p">(</span><span class="sa">b</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="nf">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">)</span> <span class="c1"># end of : line
+</span>    <span class="k">if</span> <span class="sa">b</span><span class="sh">'</span><span class="s">Oh no</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">:</span>
         <span class="n">state</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">_</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># end of : line, because we read to the first colon of :(
-</span>        <span class="n">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="s">':'</span><span class="p">)</span> 
+</span>        <span class="nf">read_until</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="sh">'</span><span class="s">:</span><span class="sh">'</span><span class="p">)</span> 
 
 <span class="c1"># unwind the "cleared" LFSR bits
-</span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">384</span><span class="p">):</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">revlfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">384</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="nf">revlfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
 <span class="c1"># unwind all the used LFSR bits
-</span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">revlfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="nf">revlfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
-<span class="n">ans</span> <span class="o">=</span> <span class="s">""</span>
-<span class="n">cum</span> <span class="o">=</span> <span class="s">""</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="sh">""</span>
+<span class="n">cum</span> <span class="o">=</span> <span class="sh">""</span>
 <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
-    <span class="n">true_val</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="p">((</span><span class="n">state</span><span class="o">&gt;&gt;</span><span class="n">i</span><span class="p">)</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pk</span><span class="p">)])</span><span class="o">%</span><span class="n">q</span>
-    <span class="n">diff</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">true_val</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">true_val</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">([</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="nf">if </span><span class="p">((</span><span class="n">state</span><span class="o">&gt;&gt;</span><span class="n">i</span><span class="p">)</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">pk</span><span class="p">)])</span><span class="o">%</span><span class="n">q</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">true_val</span><span class="p">)</span> <span class="o">-</span> <span class="nf">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">q</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">diff</span> <span class="o">-=</span> <span class="n">q</span>
-    <span class="n">cum</span> <span class="o">+=</span> <span class="s">"0"</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span><span class="mi">2</span><span class="p">)</span> <span class="k">else</span> <span class="s">"1"</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cum</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">8</span><span class="p">):</span>
-        <span class="n">ans</span> <span class="o">+=</span><span class="nb">chr</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">cum</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">cum</span> <span class="o">=</span> <span class="s">""</span>
-    <span class="n">state</span> <span class="o">=</span> <span class="n">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">cum</span> <span class="o">+=</span> <span class="sh">"</span><span class="s">0</span><span class="sh">"</span> <span class="k">if</span> <span class="nf">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">q</span> <span class="o">&gt;&gt;</span><span class="mi">2</span><span class="p">)</span> <span class="k">else</span> <span class="sh">"</span><span class="s">1</span><span class="sh">"</span>
+    <span class="nf">if </span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">cum</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">8</span><span class="p">):</span>
+        <span class="n">ans</span> <span class="o">+=</span><span class="nf">chr</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="n">cum</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">cum</span> <span class="o">=</span> <span class="sh">""</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="nf">lfsr</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
 </code></pre></div></div>
 
 
@@ -286,7 +286,7 @@ On the other hand my solution didn’t even look at a single vector!</p>
 </div>
 
       <div class="footer-col footer-col-3">
-        <p>PhD student studying theoretical computer science  at the University of Illinois at Urbana-Champaign (UIUC). I solve problems for fun.</p>
+        <p>Da Wei Zheng - Theoretical Computer Science Postdoc at ISTA</p>
       </div>
     </div>
 

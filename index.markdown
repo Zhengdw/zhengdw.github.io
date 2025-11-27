@@ -45,6 +45,8 @@ and *minor-free graphs*
 
 **Service.**
 I've been a subreviewer for the conferences: 
+STOC 2026,
+STACS 2026,
 SODA 2026,
 SOSA 2026,
 ESA 2025,
@@ -97,6 +99,10 @@ I've also reviewed for the journals CGTA, JCST, JEA, and Operation Research Lett
 ## News
 
 Inspired by others, I've started updating my website with news.
+
+**[Oct 2025]** I started as a postdoc at [ISTA](https://ista.ac.at/home) with [Monika Henzinger](https://ista.ac.at/en/research/henzinger_monika-group/)!
+
+**[Sep 2025]** Congratulations to UIUC team Ippatsu for getting [20th at ICPC World Finals 2025 in Baku](https://x.com/siebelschool/status/1969399317988336014)!
 
 **[Aug 2025]** I recieved the [CCCG 2025](https://sites.google.com/view/cccgwads-2025/home) PhD Dissertation Award!
 
