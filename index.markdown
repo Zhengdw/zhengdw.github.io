@@ -7,7 +7,7 @@ layout: home
 # About 
 
 Hi, I'm David.
-I'll be joining IST Austria as a postdoctoral researcher with [Monika Henzinger](https://ista.ac.at/en/research/henzinger_monika-group/).
+I'm a postdoctoral researcher at the Institute of Science and Technology Austria (ISTA) with [Monika Henzinger](https://ista.ac.at/en/research/henzinger_monika-group/).
 I was a PhD student in Computer Science at the University of Illinois at Urbana-Champaign (UIUC) where I was fortunate enough to be advised by [Timothy M. Chan](https://tmc.web.engr.illinois.edu/).
 I completed a BSc in Combined Honours Computer Science and Mathematics and a
 MSc in Computer Science at the University of British Columbia (UBC) with [Will Evans](https://www.cs.ubc.ca/~will/). 
@@ -20,11 +20,17 @@ You can see [a complete list of my papers here](/publications.html) and my [CV h
 
 My interests lie in theoretical computer science, predominantly in algorithms and data structures pertaining to geometry or graphs.
 
-I enjoyed some early success with *geometric optimization challenges*
- ([CG:SHOP 2020](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2020.83),
-  [CG:SHOP 2021](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2021.64),
-  [CG:SHOP 2022](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2022.72)).
-Since then, I've worked on *geometric data structures*, 
+Lately I've been thinking about problems in 
+*geometric graphs*
+ ([diameter](https://arxiv.org/abs/2510.16346)
+  [UDGs](https://arxiv.org/abs/2407.15980),
+  [emulators](https://arxiv.org/abs/2510.21700)),
+*planar graphs*
+ ([MPC](https://doi.org/10.1137/1.9781611977912.155),
+  [steiner trees](https://doi.org/10.48550/arXiv.2407.01904)),
+and *minor-free graphs*
+ ([diameter and distance oracles](https://arxiv.org/abs/2410.12003)).
+I've worked on *geometric data structures*, 
  ([Hopcroft's problem](https://doi.org/10.1137/1.9781611977073.10),
   [cuttings](https://doi.org/10.1137/1.9781611977554.ch49),
   [simplex](https://doi.org/10.1137/1.9781611977554.ch54) 
@@ -33,18 +39,15 @@ Since then, I've worked on *geometric data structures*,
 and *data structures for combinatorial optimization*
  ([matchings](https://doi.org/10.1007/978-3-031-32726-1_32),
   [submodular optimization](https://doi.org/10.4230/LIPIcs.ICALP.2023.74)).
-Lately I've been thinking about problems in 
-*geometric graphs*
- ([UDGs](https://arxiv.org/abs/2407.15980),
-  [matchings](/publications.html)),
-*planar graphs*
- ([MPC](https://doi.org/10.1137/1.9781611977912.155),
-  [steiner trees](https://doi.org/10.48550/arXiv.2407.01904)),
-and *minor-free graphs*
- ([diameter and distance oracles](https://arxiv.org/abs/2410.12003)).
+
+I use to work on some *geometric optimization challenges*
+ ([CG:SHOP 2020](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2020.83),
+  [CG:SHOP 2021](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2021.64),
+  [CG:SHOP 2022](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2022.72)).
 
 **Service.**
 I've been a subreviewer for the conferences: 
+ICALP 2026,
 SODA 2026,
 SOSA 2026,
 ESA 2025,
@@ -63,7 +66,7 @@ SODA 2023,
 ESA 2022, and
 SoCG 2022. 
 
-I've also reviewed for the journals CGTA, JCST, JEA, and Operation Research Letters.
+I've also reviewed for the journals CGTA, JCST, JEA, JoCG and Operation Research Letters.
 
 ---
 ## Other Activities
@@ -76,6 +79,14 @@ I started playing in some Capture the Flag (CTF) events for fun in 2021-2022. Yo
 ## News
 
 Inspired by others, I've started updating my website with news.
+
+**[Feb 2026]** 
+"Cutting Planarians: Planar Emulators for String Graphs" coauthored with [Hsien-Chih Chang](https://hcsoso.github.io/), [Jonathan Conroy](https://jonathan-conroy.github.io/), and [Zihan Tan](https://sites.google.com/view/zihantan) was accepted to STOC 2026!
+
+"Charting the Diameter Computation Landscape of Geometric Intersection Graphs in
+Three and Higher Dimensions" coauthored with [Timothy M. Chan](https://tmc.web.engr.illinois.edu/), [Hsien-Chih Chang](https://hcsoso.github.io/), [Jie Gao](https://sites.rutgers.edu/jie-gao/about/), [Sándor Kisfaludi-Bak](https://skisfaludibak.com/), and [Hung Le](https://hunglvosu.github.io/) was accepted to SoCG 2026.
+
+**[Oct 2025]** I have started at ISTA.
 
 **[Aug 2025]** I recieved the [CCCG 2025](https://sites.google.com/view/cccgwads-2025/home) PhD Dissertation Award!
 
