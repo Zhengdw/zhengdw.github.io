@@ -26,13 +26,9 @@ title: "Publications"
 
 {% bibliography --query @*[year=2022] %}
 
-&nbsp;
-
 ## 2021
 
 {% bibliography --query @*[year=2021] %}
-
-&nbsp;
 
 ## 2020
 
