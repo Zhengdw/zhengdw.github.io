@@ -46,6 +46,8 @@ I use to work on some *geometric optimization challenges*
   [CG:SHOP 2022](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SoCG.2022.72)).
 
 **Service.**
+I will be on the PC of ESA 2026.
+
 I've been a subreviewer for the conferences: 
 ICALP 2026,
 STOC 2026,
@@ -107,7 +109,6 @@ I've also reviewed for the journals CGTA, JCST, JEA, JoCG and Operation Research
 
 Inspired by others, I've started updating my website with news.
 
-<<<<<<< HEAD
 **[Feb 2026]** 
 "Cutting Planarians: Planar Emulators for String Graphs" coauthored with [Hsien-Chih Chang](https://hcsoso.github.io/), [Jonathan Conroy](https://jonathan-conroy.github.io/), and [Zihan Tan](https://sites.google.com/view/zihantan) was accepted to STOC 2026!
 
