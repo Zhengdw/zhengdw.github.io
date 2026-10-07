@@ -12,7 +12,7 @@ I was a PhD student in Computer Science at the University of Illinois at Urbana-
 I completed a BSc in Combined Honours Computer Science and Mathematics and a
 MSc in Computer Science at the University of British Columbia (UBC) with [Will Evans](https://www.cs.ubc.ca/~will/). 
 
-You can see [a list of my papers here](#publications) and my [CV here](/cv.html), or if you prefer [Google Scholar](https://scholar.google.com/citations?user=whlzbc8AAAAJ&hl=en) or [DBLP](https://dblp.org/pid/87/10078.html). For recent personal updates, [see here](#news).
+You can see [a list of my papers here](#publications) and my [CV here](/cv.html) (Last updated Oct 2026), or if you prefer [Google Scholar](https://scholar.google.com/citations?user=whlzbc8AAAAJ&hl=en) or [DBLP](https://dblp.org/pid/87/10078.html). For recent personal updates, [see here](#news).
 
 ---   
 
@@ -44,6 +44,8 @@ and *minor-free graphs*
  ([diameter and distance oracles](https://arxiv.org/abs/2410.12003)).
 
 **Service.**
+My program committee service includes ESA 2026 and SoCG 2027.
+
 I've been a subreviewer for the conferences: 
 STOC 2026,
 STACS 2026,
@@ -69,6 +71,10 @@ I've also reviewed for the journals CGTA, JCST, JEA, and Operation Research Lett
 
 ---
 ## Publications
+
+### 2026
+
+{% bibliography --query @*[year=2026] %}
 
 ### 2025
 
@@ -102,7 +108,7 @@ Inspired by others, I've started updating my website with news.
 
 **[Oct 2025]** I started as a postdoc at [ISTA](https://ista.ac.at/home) with [Monika Henzinger](https://ista.ac.at/en/research/henzinger_monika-group/)!
 
-**[Sep 2025]** Congratulations to UIUC team Ippatsu for getting [20th at ICPC World Finals 2025 in Baku](https://x.com/siebelschool/status/1969399317988336014)!
+**[Sep 2025]** Congratulations to UIUC team Ippatsu for getting [20th at ICPC World Finals 2025 in Baku](https://x.com/siebelschool/status/1969399317988336014)! I also got an award for 5 years of coaching teams to World Finals.
 
 **[Aug 2025]** I recieved the [CCCG 2025](https://sites.google.com/view/cccgwads-2025/home) PhD Dissertation Award!
 

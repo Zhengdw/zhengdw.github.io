@@ -57,8 +57,8 @@ scholar:
   #style: apa
   locale: en
 
-  sort_by: year
-  order: descending
+  # Year sections are defined in the pages; preserve BibTeX file order within each year.
+  sort_by: none
 
   source: _bibliography
 
