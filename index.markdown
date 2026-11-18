@@ -10,6 +10,8 @@ Hi, I’m David. I’m a postdoctoral researcher in [Monika Henzinger’s group]
 
 I received my PhD in computer science from the University of Illinois Urbana-Champaign in 2025, advised by [Timothy M. Chan](https://tmc.web.engr.illinois.edu/). My dissertation received the 2025 CCCG Best PhD Dissertation Award. Before that, I completed an MSc in computer science, advised by [Will Evans](https://www.cs.ubc.ca/~will/), and a BSc in combined honours computer science and mathematics at the University of British Columbia.
 
+I am currently on the academic job market.
+
 Email: [dzheng at institutename.ac.at](mailto:dzheng at ista dot ac point at) · [CV](/cv.html) (Last updated Nov 2026) · [Google Scholar](https://scholar.google.com/citations?user=whlzbc8AAAAJ&hl=en) · [DBLP](https://dblp.org/pid/87/10078.html)
 
 ---   

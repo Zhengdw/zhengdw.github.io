@@ -23,7 +23,7 @@ email: dzheng atsymbl ista doot ac point at
 description: >- # this means to ignore newlines until "baseurl:"
             Da Wei Zheng - Theoretical Computer Science Postdoc at ISTA
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://zhengdw.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: none
 github_username:  zhengdw
 linkedin_username: zhengdw
