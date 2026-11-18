@@ -37,6 +37,7 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
+    erb (6.0.7)
     eventmachine (1.2.7)
     ffi (1.17.2)
     ffi (1.17.2-x64-mingw-ucrt)
@@ -145,10 +146,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  erb
   jekyll (~> 4.3)
   jekyll-feed (~> 0.12)
   jekyll-redirect-from (~> 0.1)
   jekyll-scholar
+  logger
   minima (>= 2.5)
   tzinfo (~> 1.2)
   tzinfo-data

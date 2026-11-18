@@ -19,17 +19,21 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Da Wei (David) Zheng
-email: dwzheng2 atsymbl illinois doot edu
+email: dzheng atsymbl ista doot ac point at 
 description: >- # this means to ignore newlines until "baseurl:"
             Da Wei Zheng - Theoretical Computer Science Postdoc at ISTA
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-#twitter_username: jekyllrb
+#twitter_username: none
 github_username:  zhengdw
 linkedin_username: zhengdw
 
 # Build settings
 theme: minima
+header_pages:
+  - publications.markdown
+  - cv.markdown
+  - blog.markdown
 plugins:
   - jekyll-feed
   - jekyll-redirect-from
@@ -37,8 +41,7 @@ markdown: kramdown
 
 # other
 sass:
-  sass_dir: css
-  style:    compressed
+  style: compressed
 
 #collections:
 #  publications:

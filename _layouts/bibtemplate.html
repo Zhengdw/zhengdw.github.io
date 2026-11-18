@@ -18,7 +18,9 @@
 
 <br> 
 
-<button class="button0"  onclick="toggleBibtex{{entry.key}}()">Bibtex</button>
+<button class="button0" type="button"
+        aria-controls="a{{ entry.key | escape }}" aria-expanded="false"
+        onclick="const panel = document.getElementById(this.getAttribute('aria-controls')); panel.hidden = !panel.hidden; this.setAttribute('aria-expanded', String(!panel.hidden));">Bibtex</button>
 
 {% if entry.abstract %}
 <button class="button0"  onclick="toggleAbstract{{entry.abstract}}()">Abstract</button>
@@ -44,21 +46,10 @@
     <a href="{{ entry.slides }}"><input class="button3" type="button" value="slides" /></a>
 {% endif %}
 
-<div id="a{{entry.key}}" style="display: none;">
+<div id="a{{ entry.key | escape }}" hidden>
 <pre>{{entry.bibtex}}</pre>
 </div>
 
-
-<script>
-function toggleBibtex{{entry.key}}(parameter) {
-    var x= document.getElementById('a{{entry.key}}');
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    } else {
-        x.style.display = 'none';
-    }
-}
-</script>
 
 <script>
 function toggleAbstract{{entry.abstract}}(parameter) {
