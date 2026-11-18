@@ -19,3 +19,10 @@ changes when the checkout is on a Windows drive. To rebuild the checked-in
 
 The Sass partials in `_sass/minima` are adapted from Minima 2.5.2. They use the
 Sass module API and retain the theme's original styles.
+
+## Publishing the site
+
+Replace `assets/cv.pdf` and `_bibliography/references.bib` to update the CV
+and publications. GitHub Actions installs the locked gems and builds the site
+from source. A push to `main` deploys the site after the build succeeds.
+Push a branch named `build/<name>` to test the same build without deploying.
